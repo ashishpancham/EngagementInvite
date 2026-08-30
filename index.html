@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Engagement Invitation | Ankita & Ashish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #120d11;
+      --bg-card: rgba(28, 18, 24, 0.9);
+      --pink-primary: #e28fa2;
+      --pink-glow: #f7cbd4;
+      --gold-accent: #e5be7a;
+      --text-gold: #f5dfa8;
+      --text-light: #fef5f7;
+      --text-muted: #b89fa7;
+      --door-left-bg: linear-gradient(135deg, #e491a6 0%, #c46882 100%);
+      --door-right-bg: linear-gradient(225deg, #e491a6 0%, #c46882 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      max-height: 920px;
+      background: var(--bg-dark);
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      scroll-behavior: smooth;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: rgba(18, 13, 17, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(226, 143, 162, 0.15);
+    }
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      color: var(--text-gold);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-chip {
+      background: rgba(226, 143, 162, 0.15);
+      border: 1px solid rgba(226, 143, 162, 0.3);
+      color: var(--pink-glow);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-chip:active {
+      transform: scale(0.95);
+      background: rgba(226, 143, 162, 0.3);
+    }
+    .music-btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .music-btn.playing {
+      background: rgba(229, 190, 122, 0.25);
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+      animation: pulseMusic 1.8s infinite;
+    }
+    @keyframes pulseMusic {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* 3D Door Portal Overlay */
+    .door-portal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 40;
+      perspective: 1400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #2e1923 0%, #0d070b 100%);
+      transition: visibility 1.2s, opacity 1.2s;
+    }
+    .door-portal-overlay.opened {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .arch-frame {
+      position: absolute;
+      inset: 12px;
+      border-radius: 200px 200px 20px 20px;
+      border: 2px solid rgba(229, 190, 122, 0.35);
+      box-shadow: 0 0 35px rgba(226, 143, 162, 0.25), inset 0 0 20px rgba(0,0,0,0.8);
+      overflow: hidden;
+      display: flex;
+      perspective: 1200px;
+    }
+
+    .door-panel {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      transform-style: preserve-3d;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .door-left {
+      transform-origin: left center;
+      background: var(--door-left-bg);
+      border-right: 2px solid rgba(229, 190, 122, 0.6);
+    }
+    .door-right {
+      transform-origin: right center;
+      background: var(--door-right-bg);
+      border-left: 2px solid rgba(229, 190, 122, 0.6);
+    }
+    .door-panel::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px dashed rgba(229, 190, 122, 0.5);
+      border-radius: 120px 120px 10px 10px;
+    }
+    .door-handle {
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 48px;
+      background: linear-gradient(180deg, #f7dfa3, #b8862d);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    .door-left .door-handle { right: 12px; }
+    .door-right .door-handle { left: 12px; }
+
+    .door-portal-overlay.open .door-left { transform: rotateY(-115deg); }
+    .door-portal-overlay.open .door-right { transform: rotateY(115deg); }
+
+    .portal-action {
+      position: absolute;
+      bottom: 70px;
+      z-index: 45;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .key-badge {
+      width: 58px;
+      height: 58px;
+      background: rgba(18, 13, 17, 0.85);
+      border: 2px solid var(--gold-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-accent);
+      box-shadow: 0 0 20px rgba(229, 190, 122, 0.4);
+      animation: pulseGlow 2s infinite ease-in-out;
+      cursor: pointer;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(229, 190, 122, 0.4); }
+      50% { transform: scale(1.08); box-shadow: 0 0 28px rgba(229, 190, 122, 0.7); }
+    }
+    .portal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: var(--text-gold);
+      text-transform: uppercase;
+    }
+    .portal-sub {
+      font-size: 0.75rem;
+      color: var(--pink-glow);
+      letter-spacing: 1px;
+    }
+
+    /* Content Area */
+    .invitation-body {
+      padding: 20px 16px 80px;
+      background: radial-gradient(ellipse at top, #321622 0%, #120d11 75%);
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(229, 190, 122, 0.3);
+      border-radius: 20px;
+      padding: 26px 18px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .card-top-tag {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      color: var(--pink-primary);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .names-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      line-height: 1.15;
+      color: var(--text-gold);
+      font-weight: 700;
+      margin: 8px 0;
+    }
+    .names-title span {
+      display: block;
+      font-size: 1.35rem;
+      color: var(--pink-glow);
+      font-weight: 400;
+      font-style: italic;
+      margin: 2px 0;
+    }
+    .invitation-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* Photo Carousel */
+    .carousel-container {
+      position: relative;
+      margin: 18px 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(226, 143, 162, 0.3);
+      height: 220px;
+      background: #000;
+    }
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.4s ease-in-out;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      font-size: 0.75rem;
+      color: var(--pink-glow);
+      text-align: center;
+      font-style: italic;
+    }
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .carousel-prev { left: 8px; }
+    .carousel-next { right: 8px; }
+
+    /* Scratch Card */
+    .scratch-wrapper {
+      margin: 18px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .scratch-container {
+      width: 100%;
+      max-width: 320px;
+      height: 90px;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--gold-accent);
+    }
+    .scratch-secret {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #441b2c 0%, #200f17 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-gold);
+      font-family: 'Cormorant Garamond', serif;
+      z-index: 1;
+    }
+    .scratch-secret .secret-day {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--pink-glow);
+    }
+    .scratch-secret .secret-date {
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+    .scratch-secret .secret-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+    }
+    #scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      touch-action: none;
+    }
+    .quick-reveal-btn {
+      margin-top: 6px;
+      background: none;
+      border: none;
+      color: var(--pink-primary);
+      font-size: 0.7rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Countdown */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 18px 0;
+    }
+    .time-pill {
+      background: rgba(46, 25, 35, 0.7);
+      border: 1px solid rgba(226, 143, 162, 0.25);
+      border-radius: 12px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .time-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-gold);
+    }
+    .time-lbl {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      color: var(--pink-glow);
+      text-align: center;
+      margin: 22px 0 12px;
+      text-transform: uppercase;
+    }
+
+    /* Itinerary */
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(36, 21, 29, 0.65);
+      border: 1px solid rgba(226, 143, 162, 0.15);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .item-time {
+      background: linear-gradient(135deg, rgba(229,190,122,0.2), rgba(226,143,162,0.2));
+      border: 1px solid var(--gold-accent);
+      color: var(--text-gold);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 5px 7px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+    .item-details h4 {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+    .item-details p {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* Dress Code & Palette Card */
+    .dress-code-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(229, 190, 122, 0.25);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .palette-swatches {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Venue & Live Map */
+    .venue-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(226, 143, 162, 0.2);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .map-embed {
+      width: 100%;
+      height: 150px;
+      border-radius: 10px;
+      border: 1px solid rgba(226, 143, 162, 0.25);
+      margin: 10px 0;
+    }
+    .parking-tag {
+      font-size: 0.7rem;
+      color: var(--text-gold);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    /* Digital Wishes / Guestbook */
+    .guestbook-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(226, 143, 162, 0.25);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .wish-input, .wish-name {
+      width: 100%;
+      background: rgba(18, 13, 17, 0.8);
+      border: 1px solid rgba(226, 143, 162, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #fff;
+      font-size: 0.75rem;
+      font-family: inherit;
+      margin-bottom: 8px;
+    }
+    .wishes-feed {
+      max-height: 140px;
+      overflow-y: auto;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .wish-bubble {
+      background: rgba(46, 25, 35, 0.6);
+      border-left: 2px solid var(--gold-accent);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+    }
+    .wish-bubble strong { color: var(--pink-glow); }
+
+    /* Action Buttons */
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 10px;
+      border-radius: 12px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s;
+    }
+    .btn-action:active { transform: scale(0.97); }
+    .btn-rsvp {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #fff;
+    }
+    .btn-cal {
+      background: linear-gradient(135deg, #e5be7a 0%, #b8862d 100%);
+      color: #120d11;
+    }
+
+    .replay-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 14px auto 0;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: #1e1319;
+      border: 1px solid var(--pink-primary);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .theme-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .theme-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport" id="viewport">
+    
+    <!-- Top Header -->
+    <header class="top-nav">
+      <div class="brand-title">
+        <i data-lucide="sparkles" size="16"></i> INVITESTORY
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-chip music-btn" id="musicBtn" onclick="toggleAudio()" title="Toggle Romantic Ambient Music">
+          <i data-lucide="music" size="14"></i>
+        </button>
+        <button class="btn-chip" onclick="openThemeModal()">
+          <i data-lucide="layout-grid" size="12"></i> Door Style
+        </button>
+      </div>
+    </header>
+
+    <!-- 3D Door Portal Screen -->
+    <div class="door-portal-overlay" id="doorPortal">
+      <div class="arch-frame">
+        <div class="door-panel door-left" id="doorL"><div class="door-handle"></div></div>
+        <div class="door-panel door-right" id="doorR"><div class="door-handle"></div></div>
+      </div>
+
+      <div class="portal-action" id="portalAction">
+        <div class="key-badge" onclick="openDoors()">
+          <i data-lucide="key" size="24"></i>
+        </div>
+        <div class="portal-text">Tap To Open</div>
+        <div class="portal-sub">An Invitation Awaits</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="invitation-body">
+      
+      <div class="hero-card">
+        <div class="card-top-tag">Together With Their Families</div>
+        <h1 class="names-title">
+          Ankita
+          <span>&</span>
+          Ashish
+        </h1>
+        <p class="invitation-sub">Joyfully invite you to celebrate their Engagement Ceremony with love & blessings.</p>
+
+        <!-- Couple Photo Carousel -->
+        <div class="carousel-container">
+          <button class="carousel-nav carousel-prev" onclick="prevSlide()"><i data-lucide="chevron-left" size="16"></i></button>
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=60" alt="Couple 1" />
+              <div class="carousel-caption">"A journey of love, shared laughter, and forever"</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=60" alt="Couple 2" />
+              <div class="carousel-caption">Two souls uniting in celebration</div>
+            </div>
+          </div>
+          <button class="carousel-nav carousel-next" onclick="nextSlide()"><i data-lucide="chevron-right" size="16"></i></button>
+        </div>
+
+        <!-- Scratch-to-Reveal Date -->
+        <div class="scratch-wrapper">
+          <div class="scratch-container">
+            <div class="scratch-secret">
+              <span class="secret-day">Saturday</span>
+              <span class="secret-date">OCTOBER 17, 2026</span>
+              <span class="secret-time">5:00 PM Onwards</span>
+            </div>
+            <canvas id="scratch-canvas"></canvas>
+          </div>
+          <button class="quick-reveal-btn" onclick="revealDateInstant()">✨ Scratch / Quick Reveal Date</button>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-grid">
+          <div class="time-pill"><div class="time-num" id="days">00</div><div class="time-lbl">Days</div></div>
+          <div class="time-pill"><div class="time-num" id="hours">00</div><div class="time-lbl">Hours</div></div>
+          <div class="time-pill"><div class="time-num" id="mins">00</div><div class="time-lbl">Mins</div></div>
+          <div class="time-pill"><div class="time-num" id="secs">00</div><div class="time-lbl">Secs</div></div>
+        </div>
+      </div>
+
+      <!-- Dress Code & Color Palette -->
+      <div class="dress-code-card">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text-gold); font-weight:700;">
+          <i data-lucide="sparkles" size="14"></i> Dress Code: Indian Festive / Pastels
+        </div>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">We encourage celebrating in soft tones and vibrant traditional attire.</p>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#f4c2c2;" title="Blush Rose"></div>
+          <div class="swatch" style="background:#e5be7a;" title="Warm Gold"></div>
+          <div class="swatch" style="background:#cbe3db;" title="Mint Sage"></div>
+          <div class="swatch" style="background:#e8dff5;" title="Lavender Mist"></div>
+        </div>
+      </div>
+
+      <!-- Itinerary -->
+      <div class="section-title">Program Timeline</div>
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <div class="item-time">5:00 PM</div>
+          <div class="item-details">
+            <h4>Welcome & High Tea</h4>
+            <p>Guest arrivals & sweet refreshments</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">6:30 PM</div>
+          <div class="item-details">
+            <h4>Ring Exchange & Sagai</h4>
+            <p>Auspicious rituals & family blessings</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">8:00 PM</div>
+          <div class="item-details">
+            <h4>Royal Feast & Music</h4>
+            <p>Gourmet dinner & celebratory dance</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Venue & Embedded Map -->
+      <div class="venue-card">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--text-gold); font-weight:700;">The Grand Orchid Banquet</div>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin:3px 0 8px;">Ghodbunder Road, Thane West, Thane, Maharashtra</p>
+        <iframe class="map-embed" src="https://maps.google.com/maps?q=Thane+West+Maharashtra&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+        <div class="parking-tag">
+          <i data-lucide="car" size="14"></i> Valet parking available at the banquet entrance
+        </div>
+      </div>
+
+      <!-- Interactive WhatsApp RSVP & Calendar Action Bar -->
+      <div class="action-row">
+        <button class="btn-action btn-rsvp" onclick="openWhatsAppRSVP()">
+          <i data-lucide="message-circle" size="16"></i> RSVP WhatsApp
+        </button>
+        <button class="btn-action btn-cal" onclick="addToCalendar()">
+          <i data-lucide="calendar" size="16"></i> Save Date
+        </button>
+      </div>
+
+      <!-- Digital Guestbook / Wishes -->
+      <div class="guestbook-card">
+        <div style="font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text-gold); font-weight:700; margin-bottom:8px;">
+          Send Blessings & Wishes
+        </div>
+        <input type="text" id="guestName" class="wish-name" placeholder="Your Name (e.g. Rahul)" />
+        <textarea id="guestMsg" class="wish-input" rows="2" placeholder="Write a sweet message for Ankita & Ashish..."></textarea>
+        <button class="btn-action btn-cal" style="width:100%; padding:8px;" onclick="addWish()">
+          <i data-lucide="send" size="13"></i> Send Blessing
+        </button>
+        <div class="wishes-feed" id="wishesFeed">
+          <div class="wish-bubble"><strong>Pooja & Family:</strong> Heartiest congratulations to both of you! Excited to be there. 💖</div>
+          <div class="wish-bubble"><strong>Rohan:</strong> Can't wait for Oct 17! Wishing you lifelong happiness. ✨</div>
+        </div>
+      </div>
+
+      <button class="replay-btn" onclick="replayDoorAnimation()">
+        <i data-lucide="rotate-ccw" size="13"></i> Replay Door Opening
+      </button>
+
+    </main>
+
+  </div>
+
+  <!-- Door Style Switcher Modal -->
+  <div class="modal-backdrop" id="themeModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('themeModal')"><i data-lucide="x" size="18"></i></button>
+      <h3 style="font-family:'Cormorant Garamond', serif; color: var(--text-gold); font-size: 1.3rem;">Select Door Style</h3>
+      <div class="theme-list">
+        <div class="theme-option" onclick="changeDoorTheme('pink')">
+          <div class="theme-thumb" style="background: linear-gradient(135deg, #e491a6, #c46882);"></div>
+          <div><div style="font-size:0.8rem; font-weight:600;">Blush Floral (Default)</div></div>
+        </div>
+        <div class="theme-option" onclick="changeDoorTheme('emerald')">
+          <div class="theme-thumb" style="background: linear-gradient(135deg, #2b7a66, #123d32);"></div>
+          <div><div style="font-size:0.8rem; font-weight:600;">Emerald Arch</div></div>
+        </div>
+        <div class="theme-option" onclick="changeDoorTheme('royal')">
+          <div class="theme-thumb" style="background: linear-gradient(135deg, #264a7f, #142442);"></div>
+          <div><div style="font-size:0.8rem; font-weight:600;">Royal Mediterranean</div></div>
+        </div>
+        <div class="theme-option" onclick="changeDoorTheme('gold')">
+          <div class="theme-thumb" style="background: linear-gradient(135deg, #ffd000, #b8862d);"></div>
+          <div><div style="font-size:0.8rem; font-weight:600;">Gold Arabesque</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    /* Web Audio Romantic Indian Ambient Chimes (No external audio file needed) */
+    let audioCtx = null;
+    let isAudioPlaying = false;
+    let musicInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playWarmChime(freq, delay) {
+      if (!audioCtx || !isAudioPlaying) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+      
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + delay + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + delay + 2.8);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime + delay);
+      osc.stop(audioCtx.currentTime + delay + 3);
+    }
+
+    function startMusicLoop() {
+      const notes = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33]; // Raag inspired pentatonic
+      isAudioPlaying = true;
+      document.getElementById('musicBtn').classList.add('playing');
+      
+      musicInterval = setInterval(() => {
+        if (!isAudioPlaying) return;
+        const note = notes[Math.floor(Math.random() * notes.length)];
+        playWarmChime(note, 0);
+        if (Math.random() > 0.4) {
+          playWarmChime(notes[Math.floor(Math.random() * notes.length)], 0.5);
+        }
+      }, 1600);
+    }
+
+    function toggleAudio() {
+      initAudio();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (isAudioPlaying) {
+        isAudioPlaying = false;
+        clearInterval(musicInterval);
+        document.getElementById('musicBtn').classList.remove('playing');
+      } else {
+        startMusicLoop();
+      }
+    }
+
+    /* 3D Door Open Trigger */
+    function openDoors() {
+      initAudio();
+      if (!isAudioPlaying) {
+        startMusicLoop();
+      }
+      const portal = document.getElementById('doorPortal');
+      portal.classList.add('open');
+      document.getElementById('portalAction').style.opacity = '0';
+      setTimeout(() => { portal.classList.add('opened'); }, 1100);
+    }
+
+    function replayDoorAnimation() {
+      const portal = document.getElementById('doorPortal');
+      portal.classList.remove('opened', 'open');
+      document.getElementById('portalAction').style.opacity = '1';
+      document.getElementById('viewport').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* Photo Slider */
+    let currentSlide = 0;
+    function showSlide(index) {
+      const track = document.getElementById('carouselTrack');
+      const total = track.children.length;
+      if (index >= total) currentSlide = 0;
+      else if (index < 0) currentSlide = total - 1;
+      else currentSlide = index;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    /* Scratch Card */
+    const canvas = document.getElementById('scratch-canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let isRevealed = false;
+
+    function initScratchCard() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      ctx.fillStyle = '#bfa15f';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = '600 13px Montserrat';
+      ctx.fillStyle = '#1c1218';
+      ctx.textAlign = 'center';
+      ctx.fillText('✨ SCRATCH TO REVEAL DATE ✨', canvas.width / 2, canvas.height / 2 + 5);
+    }
+
+    function scratch(e) {
+      if (!isDrawing || isRevealed) return;
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mousemove', scratch);
+    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+    canvas.addEventListener('touchend', () => isDrawing = false);
+    canvas.addEventListener('touchmove', scratch);
+
+    function revealDateInstant() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      isRevealed = true;
+    }
+
+    /* Live Countdown */
+    const targetEventDate = new Date("October 17, 2026 17:00:00").getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetEventDate - now;
+      if (distance < 0) return;
+      document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("mins").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("secs").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* WhatsApp RSVP Direct Link */
+    function openWhatsAppRSVP() {
+      const text = encodeURIComponent("Hi Ankita & Ashish! ✨ I would love to attend your Engagement Ceremony on October 17th, 2026 at The Grand Orchid Banquet, Thane. Looking forward to celebrating with you both!");
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    /* Add to Calendar (.ics download) */
+    function addToCalendar() {
+      const icsData = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "BEGIN:VEVENT",
+        "SUMMARY:Engagement of Ankita & Ashish",
+        "DESCRIPTION:Celebrate the Engagement Ceremony of Ankita & Ashish at Thane West.",
+        "LOCATION:The Grand Orchid Banquet, Ghodbunder Road, Thane West, Maharashtra",
+        "DTSTART:20261017T113000Z",
+        "DTEND:20261017T173000Z",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\n");
+      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    /* Guestbook Feature */
+    function addWish() {
+      const nameInput = document.getElementById('guestName');
+      const msgInput = document.getElementById('guestMsg');
+      if (!nameInput.value.trim() || !msgInput.value.trim()) return;
+
+      const feed = document.getElementById('wishesFeed');
+      const bubble = document.createElement('div');
+      bubble.className = 'wish-bubble';
+      bubble.innerHTML = `<strong>${nameInput.value.trim()}:</strong> ${msgInput.value.trim()} ✨`;
+      feed.prepend(bubble);
+
+      nameInput.value = '';
+      msgInput.value = '';
+    }
+
+    /* Theme Switcher */
+    function openThemeModal() { document.getElementById('themeModal').classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    function changeDoorTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'emerald') {
+        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #2b7a66, #123d32)');
+        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #2b7a66, #123d32)');
+      } else if (theme === 'royal') {
+        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #264a7f, #142442)');
+        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #264a7f, #142442)');
+      } else if (theme === 'gold') {
+        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #ffd000, #b8862d)');
+        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #ffd000, #b8862d)');
+      } else {
+        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #e491a6, #c46882)');
+        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #e491a6, #c46882)');
+      }
+      closeModal('themeModal');
+      replayDoorAnimation();
+    }
+
+    window.addEventListener('load', initScratchCard);
+  </script>
+</body>
+</html>
