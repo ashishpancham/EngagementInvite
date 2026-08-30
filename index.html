@@ -1002,27 +1002,51 @@
     }
 
     /* Add to Calendar (.ics download) */
-    function addToCalendar() {
-      const icsData = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "BEGIN:VEVENT",
-        "SUMMARY:Engagement of Ankita & Ashish",
-        "DESCRIPTION:Celebrate the Engagement Ceremony of Ankita & Ashish at Thane West.",
-        "LOCATION:The Grand Orchid Banquet, Ghodbunder Road, Thane West, Maharashtra",
-        "DTSTART:20261017T113000Z",
-        "DTEND:20261017T173000Z",
-        "END:VEVENT",
-        "END:VCALENDAR"
-      ].join("\n");
-      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
-      const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    /* Device-Aware Calendar Integration */
+function addToCalendar() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  const title = "Engagement of Ankita & Ashish";
+  const details = "Celebrate the Engagement Ceremony of Ankita & Ashish at Thane West.";
+  const location = "The Grand Orchid Banquet, Ghodbunder Road, Thane West, Maharashtra";
+  const startUTC = "20261017T113000Z";
+  const endUTC = "20261017T173000Z";
+
+  if (isIOS) {
+    // Generates & opens native Apple Calendar (.ics) for iOS
+    const icsData = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Invitestory//EN",
+      "BEGIN:VEVENT",
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${details}`,
+      `LOCATION:${location}`,
+      `DTSTART:${startUTC}`,
+      `DTEND:${endUTC}`,
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+
+    const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    // Opens Google Calendar directly in browser/app for Android & other platforms
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+      `&text=${encodeURIComponent(title)}` +
+      `&dates=${startUTC}/${endUTC}` +
+      `&details=${encodeURIComponent(details)}` +
+      `&location=${encodeURIComponent(location)}`;
+
+    window.open(gCalUrl, '_blank');
+  }
+}
 
     /* Guestbook Feature */
     function addWish() {
