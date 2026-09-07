@@ -522,42 +522,6 @@
       margin-top: 4px;
     }
 
-    /* Digital Wishes / Guestbook */
-    .guestbook-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(226, 143, 162, 0.25);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .wish-input, .wish-name {
-      width: 100%;
-      background: rgba(18, 13, 17, 0.8);
-      border: 1px solid rgba(226, 143, 162, 0.3);
-      border-radius: 8px;
-      padding: 8px 10px;
-      color: #fff;
-      font-size: 0.75rem;
-      font-family: inherit;
-      margin-bottom: 8px;
-    }
-    .wishes-feed {
-      max-height: 140px;
-      overflow-y: auto;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .wish-bubble {
-      background: rgba(46, 25, 35, 0.6);
-      border-left: 2px solid var(--gold-accent);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-    }
-    .wish-bubble strong { color: var(--pink-glow); }
-
     /* Action Buttons */
     .action-row {
       display: grid;
@@ -822,7 +786,6 @@
         <div class="venue-address-block">
           Manvelpada, Virar East — CRQC+HQC, Smriti Height, Backside More Gaov Talav, Virar East Railway Station Rd, Ekvira Darshan, Virar East, Vasai-Virar, Maharashtra 401209
         </div>
-        <!-- Google Map centered on the coordinates -->
         <iframe 
           class="map-embed" 
           src="https://maps.google.com/maps?q=19.4638,72.8139&t=&z=16&ie=UTF8&iwloc=&output=embed" 
@@ -841,22 +804,6 @@
         <button class="btn-action btn-cal" onclick="addToCalendar()">
           <i data-lucide="calendar" size="16"></i> Save Date
         </button>
-      </div>
-
-      <!-- Digital Guestbook / Wishes -->
-      <div class="guestbook-card">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text-gold); font-weight:700; margin-bottom:8px;">
-          Send Blessings & Wishes
-        </div>
-        <input type="text" id="guestName" class="wish-name" placeholder="Your Name (e.g. Rahul)" />
-        <textarea id="guestMsg" class="wish-input" rows="2" placeholder="Write a warm note for Ankita & Ashish..."></textarea>
-        <button class="btn-action btn-cal" style="width:100%; padding:8px;" onclick="addWish()">
-          <i data-lucide="send" size="13"></i> Send Blessing
-        </button>
-        <div class="wishes-feed" id="wishesFeed">
-          <div class="wish-bubble"><strong>Pooja & Family:</strong> Heartiest congratulations to both of you! Excited to be there. 💖</div>
-          <div class="wish-bubble"><strong>Rohan:</strong> Can't wait for Oct 16! Wishing you lifelong happiness. ✨</div>
-        </div>
       </div>
 
       <button class="replay-btn" onclick="replayDoorAnimation()">
@@ -1058,7 +1005,6 @@
       const details = "Celebrate the Engagement Ceremony of Ankita & Ashish at Le Vivanta Banquet, Virar East.";
       const location = "Le Vivanta Banquet, Manvelpada, Virar East, Vasai-Virar, Maharashtra 401209";
       
-      // 6:00 PM IST (12:30 UTC) to 12:00 AM IST (18:30 UTC)
       const startUTC = "20261016T123000Z";
       const endUTC = "20261016T183000Z";
 
@@ -1093,22 +1039,6 @@
 
         window.open(gCalUrl, '_blank');
       }
-    }
-
-    /* Digital Wishes / Guestbook */
-    function addWish() {
-      const nameInput = document.getElementById('guestName');
-      const msgInput = document.getElementById('guestMsg');
-      if (!nameInput.value.trim() || !msgInput.value.trim()) return;
-
-      const feed = document.getElementById('wishesFeed');
-      const bubble = document.createElement('div');
-      bubble.className = 'wish-bubble';
-      bubble.innerHTML = `<strong>${nameInput.value.trim()}:</strong> ${msgInput.value.trim()} ✨`;
-      feed.prepend(bubble);
-
-      nameInput.value = '';
-      msgInput.value = '';
     }
 
     /* Theme Switcher */
