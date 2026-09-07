@@ -234,7 +234,7 @@
       letter-spacing: 1px;
     }
 
-    /* Content Area */
+    /* Main Content */
     .invitation-body {
       padding: 20px 16px 80px;
       background: radial-gradient(ellipse at top, #321622 0%, #120d11 75%);
@@ -393,7 +393,7 @@
       cursor: pointer;
     }
 
-    /* Countdown */
+    /* Countdown Grid */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -431,21 +431,21 @@
       text-transform: uppercase;
     }
 
-    /* Itinerary */
+    /* Detailed Timeline */
     .timeline-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 20px;
     }
     .timeline-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       background: rgba(36, 21, 29, 0.65);
       border: 1px solid rgba(226, 143, 162, 0.15);
       border-radius: 12px;
-      padding: 10px 12px;
+      padding: 12px 14px;
     }
     .item-time {
       background: linear-gradient(135deg, rgba(229,190,122,0.2), rgba(226,143,162,0.2));
@@ -453,20 +453,23 @@
       color: var(--text-gold);
       font-size: 0.68rem;
       font-weight: 600;
-      padding: 5px 7px;
+      padding: 5px 8px;
       border-radius: 8px;
       white-space: nowrap;
+      margin-top: 2px;
     }
     .item-details h4 {
       font-size: 0.82rem;
       color: var(--text-light);
+      margin-bottom: 2px;
     }
     .item-details p {
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
+      line-height: 1.4;
     }
 
-    /* Dress Code & Palette Card */
+    /* Dress Code & Palette */
     .dress-code-card {
       background: var(--bg-card);
       border: 1px solid rgba(229, 190, 122, 0.25);
@@ -499,10 +502,16 @@
     }
     .map-embed {
       width: 100%;
-      height: 150px;
+      height: 160px;
       border-radius: 10px;
       border: 1px solid rgba(226, 143, 162, 0.25);
       margin: 10px 0;
+    }
+    .venue-address-block {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 8px;
     }
     .parking-tag {
       font-size: 0.7rem;
@@ -656,7 +665,7 @@
 
   <div class="app-viewport" id="viewport">
     
-    <!-- Top Header -->
+    <!-- Top Navigation -->
     <header class="top-nav">
       <div class="brand-title">
         <i data-lucide="sparkles" size="16"></i> INVITESTORY
@@ -697,7 +706,7 @@
           <span>&</span>
           Ashish
         </h1>
-        <p class="invitation-sub">Joyfully invite you to celebrate their Engagement Ceremony with love & blessings.</p>
+        <p class="invitation-sub">Request your gracious presence and blessings to celebrate our Engagement Ceremony.</p>
 
         <!-- Couple Photo Carousel -->
         <div class="carousel-container">
@@ -719,9 +728,9 @@
         <div class="scratch-wrapper">
           <div class="scratch-container">
             <div class="scratch-secret">
-              <span class="secret-day">Saturday</span>
-              <span class="secret-date">OCTOBER 17, 2026</span>
-              <span class="secret-time">5:00 PM Onwards</span>
+              <span class="secret-day">Friday</span>
+              <span class="secret-date">OCTOBER 16, 2026</span>
+              <span class="secret-time">6:00 PM Onwards</span>
             </div>
             <canvas id="scratch-canvas"></canvas>
           </div>
@@ -742,7 +751,7 @@
         <div style="font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text-gold); font-weight:700;">
           <i data-lucide="sparkles" size="14"></i> Dress Code: Indian Festive / Pastels
         </div>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">We encourage celebrating in soft tones and vibrant traditional attire.</p>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">Join the festivities in soft tones and traditional attire.</p>
         <div class="palette-swatches">
           <div class="swatch" style="background:#f4c2c2;" title="Blush Rose"></div>
           <div class="swatch" style="background:#e5be7a;" title="Warm Gold"></div>
@@ -751,43 +760,80 @@
         </div>
       </div>
 
-      <!-- Itinerary -->
+      <!-- Detailed Event Timeline -->
       <div class="section-title">Program Timeline</div>
       <div class="timeline-list">
         <div class="timeline-item">
-          <div class="item-time">5:00 PM</div>
+          <div class="item-time">6:00 PM</div>
           <div class="item-details">
-            <h4>Welcome & High Tea</h4>
-            <p>Guest arrivals & sweet refreshments</p>
+            <h4>Guest Arrival</h4>
+            <p>Welcome drinks, greetings & delicious starters.</p>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="item-time">6:30 PM</div>
+          <div class="item-time">7:30 PM</div>
           <div class="item-details">
-            <h4>Ring Exchange & Sagai</h4>
-            <p>Auspicious rituals & family blessings</p>
+            <h4>Grand Entry</h4>
+            <p>Grand entry of the bride and groom.</p>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="item-time">8:00 PM</div>
+          <div class="item-time">7:45 PM</div>
           <div class="item-details">
-            <h4>Royal Feast & Music</h4>
-            <p>Gourmet dinner & celebratory dance</p>
+            <h4>Ring Ceremony</h4>
+            <p>Exchange of rings and family blessings.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">8:15 PM</div>
+          <div class="item-details">
+            <h4>Performances</h4>
+            <p>Celebratory stage performances by family & friends.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">8:45 PM – 10:30 PM</div>
+          <div class="item-details">
+            <h4>Royal Dinner</h4>
+            <p>DJ dinner announcement at 8:45 PM; enjoy hot food while performances continue.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">10:30 PM – 12:00 AM</div>
+          <div class="item-details">
+            <h4>Open Floor / DJ</h4>
+            <p>Dance floor opens for everyone to celebrate!</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="item-time">11:50 PM</div>
+          <div class="item-details">
+            <h4>Cake Cutting</h4>
+            <p>Sweet celebration and midnight toasts.</p>
           </div>
         </div>
       </div>
 
-      <!-- Venue & Embedded Map -->
+      <!-- Venue & Embedded Live Map -->
       <div class="venue-card">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--text-gold); font-weight:700;">The Grand Orchid Banquet</div>
-        <p style="font-size:0.72rem; color:var(--text-muted); margin:3px 0 8px;">Ghodbunder Road, Thane West, Thane, Maharashtra</p>
-        <iframe class="map-embed" src="https://maps.google.com/maps?q=Thane+West+Maharashtra&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+        <div style="font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--text-gold); font-weight:700;">
+          Le Vivanta Banquet
+        </div>
+        <div class="venue-address-block">
+          Manvelpada, Virar East — CRQC+HQC, Smriti Height, Backside More Gaov Talav, Virar East Railway Station Rd, Ekvira Darshan, Virar East, Vasai-Virar, Maharashtra 401209
+        </div>
+        <!-- Google Map centered on the coordinates -->
+        <iframe 
+          class="map-embed" 
+          src="https://maps.google.com/maps?q=19.4638,72.8139&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+          loading="lazy">
+        </iframe>
         <div class="parking-tag">
-          <i data-lucide="car" size="14"></i> Valet parking available at the banquet entrance
+          <i data-lucide="map-pin" size="14"></i> Located right behind More Gaov Talav, Virar East
         </div>
       </div>
 
-      <!-- Interactive WhatsApp RSVP & Calendar Action Bar -->
+      <!-- Action Buttons: WhatsApp RSVP & Smart Calendar -->
       <div class="action-row">
         <button class="btn-action btn-rsvp" onclick="openWhatsAppRSVP()">
           <i data-lucide="message-circle" size="16"></i> RSVP WhatsApp
@@ -803,13 +849,13 @@
           Send Blessings & Wishes
         </div>
         <input type="text" id="guestName" class="wish-name" placeholder="Your Name (e.g. Rahul)" />
-        <textarea id="guestMsg" class="wish-input" rows="2" placeholder="Write a sweet message for Ankita & Ashish..."></textarea>
+        <textarea id="guestMsg" class="wish-input" rows="2" placeholder="Write a warm note for Ankita & Ashish..."></textarea>
         <button class="btn-action btn-cal" style="width:100%; padding:8px;" onclick="addWish()">
           <i data-lucide="send" size="13"></i> Send Blessing
         </button>
         <div class="wishes-feed" id="wishesFeed">
           <div class="wish-bubble"><strong>Pooja & Family:</strong> Heartiest congratulations to both of you! Excited to be there. 💖</div>
-          <div class="wish-bubble"><strong>Rohan:</strong> Can't wait for Oct 17! Wishing you lifelong happiness. ✨</div>
+          <div class="wish-bubble"><strong>Rohan:</strong> Can't wait for Oct 16! Wishing you lifelong happiness. ✨</div>
         </div>
       </div>
 
@@ -850,7 +896,7 @@
   <script>
     lucide.createIcons();
 
-    /* Web Audio Romantic Indian Ambient Chimes (No external audio file needed) */
+    /* Romantic Ambient Audio Chimes */
     let audioCtx = null;
     let isAudioPlaying = false;
     let musicInterval = null;
@@ -879,7 +925,7 @@
     }
 
     function startMusicLoop() {
-      const notes = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33]; // Raag inspired pentatonic
+      const notes = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33];
       isAudioPlaying = true;
       document.getElementById('musicBtn').classList.add('playing');
       
@@ -981,8 +1027,8 @@
       isRevealed = true;
     }
 
-    /* Live Countdown */
-    const targetEventDate = new Date("October 17, 2026 17:00:00").getTime();
+    /* Target Event Date: October 16, 2026 @ 6:00 PM IST */
+    const targetEventDate = new Date("October 16, 2026 18:00:00").getTime();
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = targetEventDate - now;
@@ -997,58 +1043,59 @@
 
     /* WhatsApp RSVP Direct Link */
     function openWhatsAppRSVP() {
-      const text = encodeURIComponent("Hi Ankita & Ashish! ✨ I would love to attend your Engagement Ceremony on October 17th, 2026 at The Grand Orchid Banquet, Thane. Looking forward to celebrating with you both!");
+      const text = encodeURIComponent(
+        "Hi Ankita & Ashish! ✨ I would love to attend your Engagement Ceremony on Friday, October 16th, 2026 at Le Vivanta Banquet, Virar East. Looking forward to celebrating with you both!"
+      );
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
-    /* Add to Calendar (.ics download) */
-    /* Device-Aware Calendar Integration */
-function addToCalendar() {
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    /* Device-Aware Calendar Integration (iOS Apple Calendar vs Google Calendar) */
+    function addToCalendar() {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  const title = "Engagement of Ankita & Ashish";
-  const details = "Celebrate the Engagement Ceremony of Ankita & Ashish at Thane West.";
-  const location = "The Grand Orchid Banquet, Ghodbunder Road, Thane West, Maharashtra";
-  const startUTC = "20261017T113000Z";
-  const endUTC = "20261017T173000Z";
+      const title = "Engagement of Ankita & Ashish";
+      const details = "Celebrate the Engagement Ceremony of Ankita & Ashish at Le Vivanta Banquet, Virar East.";
+      const location = "Le Vivanta Banquet, Manvelpada, Virar East, Vasai-Virar, Maharashtra 401209";
+      
+      // 6:00 PM IST (12:30 UTC) to 12:00 AM IST (18:30 UTC)
+      const startUTC = "20261016T123000Z";
+      const endUTC = "20261016T183000Z";
 
-  if (isIOS) {
-    // Generates & opens native Apple Calendar (.ics) for iOS
-    const icsData = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Invitestory//EN",
-      "BEGIN:VEVENT",
-      `SUMMARY:${title}`,
-      `DESCRIPTION:${details}`,
-      `LOCATION:${location}`,
-      `DTSTART:${startUTC}`,
-      `DTEND:${endUTC}`,
-      "END:VEVENT",
-      "END:VCALENDAR"
-    ].join("\r\n");
+      if (isIOS) {
+        const icsData = [
+          "BEGIN:VCALENDAR",
+          "VERSION:2.0",
+          "PRODID:-//Invitestory//EN",
+          "BEGIN:VEVENT",
+          `SUMMARY:${title}`,
+          `DESCRIPTION:${details}`,
+          `LOCATION:${location}`,
+          `DTSTART:${startUTC}`,
+          `DTEND:${endUTC}`,
+          "END:VEVENT",
+          "END:VCALENDAR"
+        ].join("\r\n");
 
-    const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(blob);
-    link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } else {
-    // Opens Google Calendar directly in browser/app for Android & other platforms
-    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
-      `&text=${encodeURIComponent(title)}` +
-      `&dates=${startUTC}/${endUTC}` +
-      `&details=${encodeURIComponent(details)}` +
-      `&location=${encodeURIComponent(location)}`;
+        const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+          `&text=${encodeURIComponent(title)}` +
+          `&dates=${startUTC}/${endUTC}` +
+          `&details=${encodeURIComponent(details)}` +
+          `&location=${encodeURIComponent(location)}`;
 
-    window.open(gCalUrl, '_blank');
-  }
-}
+        window.open(gCalUrl, '_blank');
+      }
+    }
 
-    /* Guestbook Feature */
+    /* Digital Wishes / Guestbook */
     function addWish() {
       const nameInput = document.getElementById('guestName');
       const msgInput = document.getElementById('guestMsg');
