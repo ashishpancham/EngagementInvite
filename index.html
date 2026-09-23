@@ -3,24 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Engagement Invitation | Ankita & Ashish</title>
+  <title>Wedding Celebrations | Ankita & Ashish</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Rozha+One&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg-dark: #120d11;
-      --bg-card: rgba(28, 18, 24, 0.9);
-      --pink-primary: #e28fa2;
-      --pink-glow: #f7cbd4;
-      --gold-accent: #e5be7a;
-      --text-gold: #f5dfa8;
-      --text-light: #fef5f7;
-      --text-muted: #b89fa7;
-      --door-left-bg: linear-gradient(135deg, #e491a6 0%, #c46882 100%);
-      --door-right-bg: linear-gradient(225deg, #e491a6 0%, #c46882 100%);
+      /* Royal Pichwai & Garden Lake Palette from artwork */
+      --sky-light: #eaf3f8;
+      --sky-soft: #d3e5ef;
+      --lake-blue: #326982;
+      --lake-deep: #1d4355;
+      --sandstone-gold: #c99365;
+      --sandstone-arch: #dfad86;
+      --foliage-green: #1f4e3f;
+      --foliage-dark: #123026;
+      --lotus-pink: #d9758e;
+      --lotus-soft: #fbebf0;
+      --text-dark: #1b323c;
+      --text-gold: #8d5626;
+      --text-muted: #53717e;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-border: rgba(201, 147, 101, 0.45);
+      --door-image: url('radha-krishna.jpg');
+      --ganesh-image: url('ganesh-ji.jpg');
     }
 
     * {
@@ -32,8 +40,8 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #000;
-      color: var(--text-light);
+      background: #112028;
+      color: var(--text-dark);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,12 +54,26 @@
       max-width: 440px;
       height: 100vh;
       max-height: 920px;
-      background: var(--bg-dark);
+      background: radial-gradient(circle at 50% 10%, var(--sky-light) 0%, var(--sky-soft) 55%, #c0d8e6 100%);
       position: relative;
       overflow-y: auto;
       overflow-x: hidden;
-      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      box-shadow: 0 0 50px rgba(0,0,0,0.6);
       scroll-behavior: smooth;
+    }
+
+    /* Falling Peacock Feathers Canvas */
+    #feathersCanvas {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      max-height: 920px;
+      pointer-events: none;
+      z-index: 35;
     }
 
     /* Top Navigation */
@@ -63,15 +85,15 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 18px;
-      background: rgba(18, 13, 17, 0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(226, 143, 162, 0.15);
+      background: rgba(234, 243, 248, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 147, 101, 0.35);
     }
     .brand-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.15rem;
       letter-spacing: 2px;
-      color: var(--text-gold);
+      color: var(--lake-deep);
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -83,11 +105,11 @@
       align-items: center;
     }
     .btn-chip {
-      background: rgba(226, 143, 162, 0.15);
-      border: 1px solid rgba(226, 143, 162, 0.3);
-      color: var(--pink-glow);
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--sandstone-gold);
+      color: var(--lake-deep);
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
       padding: 6px 10px;
       border-radius: 20px;
       cursor: pointer;
@@ -95,10 +117,6 @@
       align-items: center;
       gap: 4px;
       transition: all 0.2s;
-    }
-    .btn-chip:active {
-      transform: scale(0.95);
-      background: rgba(226, 143, 162, 0.3);
     }
     .music-btn {
       width: 32px;
@@ -110,9 +128,9 @@
       border-radius: 50%;
     }
     .music-btn.playing {
-      background: rgba(229, 190, 122, 0.25);
-      border-color: var(--gold-accent);
-      color: var(--gold-accent);
+      background: var(--sandstone-arch);
+      border-color: var(--sandstone-gold);
+      color: #fff;
       animation: pulseMusic 1.8s infinite;
     }
     @keyframes pulseMusic {
@@ -120,7 +138,7 @@
       50% { transform: scale(1.08); }
     }
 
-    /* 3D Door Portal Overlay */
+    /* 3D Door Portal */
     .door-portal-overlay {
       position: absolute;
       top: 0;
@@ -132,7 +150,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #2e1923 0%, #0d070b 100%);
+      background: radial-gradient(circle at center, #2e4d5d 0%, #152731 100%);
       transition: visibility 1.2s, opacity 1.2s;
     }
     .door-portal-overlay.opened {
@@ -145,47 +163,44 @@
       position: absolute;
       inset: 12px;
       border-radius: 200px 200px 20px 20px;
-      border: 2px solid rgba(229, 190, 122, 0.35);
-      box-shadow: 0 0 35px rgba(226, 143, 162, 0.25), inset 0 0 20px rgba(0,0,0,0.8);
+      border: 3px solid var(--sandstone-arch);
+      box-shadow: 0 0 35px rgba(29, 67, 85, 0.5), inset 0 0 30px rgba(0,0,0,0.85);
       overflow: hidden;
       display: flex;
       perspective: 1200px;
+      background: #000;
     }
-
     .door-panel {
       flex: 1;
       height: 100%;
       position: relative;
       transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
       transform-style: preserve-3d;
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.7);
+      background-image: var(--door-image);
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
     }
     .door-left {
       transform-origin: left center;
-      background: var(--door-left-bg);
-      border-right: 2px solid rgba(229, 190, 122, 0.6);
+      background-position: left center;
+      border-right: 2px solid var(--sandstone-gold);
     }
     .door-right {
       transform-origin: right center;
-      background: var(--door-right-bg);
-      border-left: 2px solid rgba(229, 190, 122, 0.6);
+      background-position: right center;
+      border-left: 2px solid var(--sandstone-gold);
     }
-    .door-panel::before {
-      content: "";
-      position: absolute;
-      inset: 20px;
-      border: 1px dashed rgba(229, 190, 122, 0.5);
-      border-radius: 120px 120px 10px 10px;
-    }
+
     .door-handle {
       position: absolute;
-      top: 50%;
+      top: 52%;
       width: 14px;
-      height: 48px;
-      background: linear-gradient(180deg, #f7dfa3, #b8862d);
+      height: 52px;
+      background: linear-gradient(180deg, #f7dfa3, var(--sandstone-gold));
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255,0.4);
     }
     .door-left .door-handle { right: 12px; }
     .door-right .door-handle { left: 12px; }
@@ -195,79 +210,90 @@
 
     .portal-action {
       position: absolute;
-      bottom: 70px;
+      bottom: 55px;
       z-index: 45;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .key-badge {
       width: 58px;
       height: 58px;
-      background: rgba(18, 13, 17, 0.85);
-      border: 2px solid var(--gold-accent);
+      background: rgba(29, 67, 85, 0.88);
+      border: 2px solid var(--sandstone-arch);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold-accent);
-      box-shadow: 0 0 20px rgba(229, 190, 122, 0.4);
+      color: var(--sandstone-arch);
+      box-shadow: 0 0 25px rgba(223, 173, 134, 0.5);
       animation: pulseGlow 2s infinite ease-in-out;
       cursor: pointer;
     }
     @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(229, 190, 122, 0.4); }
-      50% { transform: scale(1.08); box-shadow: 0 0 28px rgba(229, 190, 122, 0.7); }
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(223, 173, 134, 0.4); }
+      50% { transform: scale(1.08); box-shadow: 0 0 28px rgba(223, 173, 134, 0.7); }
     }
     .portal-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       letter-spacing: 3px;
-      color: var(--text-gold);
+      color: #fff;
       text-transform: uppercase;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
     .portal-sub {
       font-size: 0.75rem;
-      color: var(--pink-glow);
+      color: var(--sandstone-arch);
       letter-spacing: 1px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    /* Main Content */
+    /* Content Area */
     .invitation-body {
-      padding: 20px 16px 80px;
-      background: radial-gradient(ellipse at top, #321622 0%, #120d11 75%);
+      padding: 18px 16px 80px;
     }
 
+    /* Couple Card */
     .hero-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(229, 190, 122, 0.3);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 26px 18px;
+      padding: 24px 18px 22px;
       text-align: center;
       margin-bottom: 20px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 25px rgba(29, 67, 85, 0.12);
+      position: relative;
+    }
+    .ganesh-shloka {
+      font-family: 'Rozha One', 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
+      color: var(--sandstone-gold);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
     }
     .card-top-tag {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 2px;
-      color: var(--pink-primary);
+      color: var(--foliage-green);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
     .names-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.3rem;
+      font-size: 2.45rem;
       line-height: 1.15;
-      color: var(--text-gold);
+      color: var(--lake-deep);
       font-weight: 700;
-      margin: 8px 0;
     }
     .names-title span {
       display: block;
       font-size: 1.35rem;
-      color: var(--pink-glow);
+      color: var(--lotus-pink);
       font-weight: 400;
       font-style: italic;
       margin: 2px 0;
@@ -279,145 +305,191 @@
       margin-top: 8px;
     }
 
-    /* Photo Carousel */
-    .carousel-container {
-      position: relative;
-      margin: 18px 0;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(226, 143, 162, 0.3);
-      height: 220px;
-      background: #000;
+    .wedding-dates-badge {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 22px;
+      background: linear-gradient(135deg, rgba(223, 173, 134, 0.25), rgba(217, 117, 142, 0.18));
+      border: 1px solid var(--sandstone-gold);
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(201, 147, 101, 0.15);
     }
-    .carousel-track {
-      display: flex;
-      height: 100%;
-      transition: transform 0.4s ease-in-out;
+    .wedding-dates-badge .dates-primary {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--lake-deep);
+      letter-spacing: 1px;
     }
-    .carousel-slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
+    .wedding-dates-badge .dates-sub {
+      font-size: 0.65rem;
+      color: var(--lotus-pink);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: block;
+      margin-top: 1px;
     }
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.85;
-    }
-    .carousel-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
-      font-size: 0.75rem;
-      color: var(--pink-glow);
-      text-align: center;
-      font-style: italic;
-    }
-    .carousel-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      border: none;
-      color: #fff;
-      padding: 6px 8px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 5;
-    }
-    .carousel-prev { left: 8px; }
-    .carousel-next { right: 8px; }
 
-    /* Scratch Card */
-    .scratch-wrapper {
-      margin: 18px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .scratch-container {
-      width: 100%;
-      max-width: 320px;
-      height: 90px;
-      border-radius: 14px;
+    /* SACRED SHRI GANESH TEMPLE STAGE */
+    .ganesh-stage-wrapper {
       position: relative;
+      margin: 18px 0;
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid var(--gold-accent);
+      border: 1.5px solid var(--sandstone-arch);
+      background: radial-gradient(circle at 50% 15%, #ffffff 0%, #edf5f9 60%, #dae9f2 100%);
+      padding: 20px 12px 18px;
+      box-shadow: 0 10px 30px rgba(29, 67, 85, 0.15);
     }
-    .scratch-secret {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #441b2c 0%, #200f17 100%);
+    
+    .temple-arch-top {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .ganesh-blessing-header {
+      font-family: 'Rozha One', 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: var(--sandstone-gold);
+      text-shadow: 0 0 10px rgba(201, 147, 101, 0.25);
+    }
+
+    /* Ganesha Portrait Frame */
+    .ganesh-centerpiece {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: var(--text-gold);
-      font-family: 'Cormorant Garamond', serif;
-      z-index: 1;
+      margin: 8px 0 14px;
+      position: relative;
     }
-    .scratch-secret .secret-day {
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      color: var(--pink-glow);
-    }
-    .scratch-secret .secret-date {
-      font-size: 1.55rem;
-      font-weight: 700;
-    }
-    .scratch-secret .secret-time {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-family: 'Montserrat', sans-serif;
-    }
-    #scratch-canvas {
+    .ganesh-halo {
       position: absolute;
-      top: 0;
-      left: 0;
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(223, 173, 134, 0.45) 0%, transparent 70%);
+      animation: haloGlow 3s infinite alternate ease-in-out;
+    }
+    @keyframes haloGlow {
+      0% { transform: scale(0.92); opacity: 0.5; }
+      100% { transform: scale(1.08); opacity: 0.9; }
+    }
+    .ganesh-altar-frame {
+      width: 135px;
+      height: 195px;
+      border-radius: 70px 70px 14px 14px;
+      border: 2px solid var(--sandstone-gold);
+      padding: 4px;
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(29, 67, 85, 0.2);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .ganesh-altar-frame img {
       width: 100%;
       height: 100%;
-      z-index: 2;
-      touch-action: none;
+      border-radius: 66px 66px 10px 10px;
+      object-fit: cover;
+      object-position: center top;
     }
-    .quick-reveal-btn {
-      margin-top: 6px;
-      background: none;
-      border: none;
-      color: var(--pink-primary);
-      font-size: 0.7rem;
-      text-decoration: underline;
-      cursor: pointer;
+    .diyas-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.74rem;
+      color: var(--lake-deep);
+      font-weight: 600;
     }
 
-    /* Countdown Grid */
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin: 18px 0;
-    }
-    .time-pill {
-      background: rgba(46, 25, 35, 0.7);
-      border: 1px solid rgba(226, 143, 162, 0.25);
-      border-radius: 12px;
-      padding: 8px 4px;
-      text-align: center;
-    }
-    .time-num {
+    .temple-subtext {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: var(--text-gold);
+      font-size: 0.95rem;
+      color: var(--foliage-green);
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 14px;
     }
-    .time-lbl {
-      font-size: 0.58rem;
-      color: var(--text-muted);
+
+    /* Hanging Cards Grid */
+    .hanging-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+      z-index: 5;
+    }
+    .hanging-card-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+    .card-string {
+      width: 1.5px;
+      height: 18px;
+      background: linear-gradient(180deg, var(--sandstone-gold), rgba(31, 78, 63, 0.4));
+    }
+    .mini-card-pendant {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid var(--sandstone-gold);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(29, 67, 85, 0.12);
+      transition: transform 0.2s ease;
+      position: relative;
+      animation: gentleSwing 4s infinite ease-in-out alternate;
+    }
+    .hanging-card-unit:nth-child(2) .mini-card-pendant { animation-delay: 0.6s; }
+    .hanging-card-unit:nth-child(3) .mini-card-pendant { animation-delay: 1.2s; }
+    .hanging-card-unit:nth-child(4) .mini-card-pendant { animation-delay: 1.8s; }
+
+    @keyframes gentleSwing {
+      0% { transform: rotate(-1.5deg); }
+      100% { transform: rotate(1.5deg); }
+    }
+    .mini-card-pendant:active {
+      transform: scale(0.96);
+    }
+    .card-tag {
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
+      color: var(--lotus-pink);
       text-transform: uppercase;
-      margin-top: 2px;
+      font-weight: 700;
+    }
+    .card-day-num {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--lake-deep);
+      font-family: 'Cormorant Garamond', serif;
+      margin: 2px 0;
+    }
+    .card-event-name {
+      font-size: 0.72rem;
+      color: var(--foliage-green);
+      font-weight: 600;
+      line-height: 1.25;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-tap-hint {
+      font-size: 0.58rem;
+      color: var(--sandstone-gold);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-weight: 600;
     }
 
     /* Section Headings */
@@ -425,101 +497,75 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.25rem;
       letter-spacing: 2px;
-      color: var(--pink-glow);
+      color: var(--lake-deep);
       text-align: center;
       margin: 22px 0 12px;
       text-transform: uppercase;
+      font-weight: 700;
     }
 
-    /* Detailed Timeline */
-    .timeline-list {
+    /* Locations */
+    .locations-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .timeline-item {
-      display: flex;
-      align-items: flex-start;
       gap: 12px;
-      background: rgba(36, 21, 29, 0.65);
-      border: 1px solid rgba(226, 143, 162, 0.15);
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
-    .item-time {
-      background: linear-gradient(135deg, rgba(229,190,122,0.2), rgba(226,143,162,0.2));
-      border: 1px solid var(--gold-accent);
-      color: var(--text-gold);
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 5px 8px;
-      border-radius: 8px;
-      white-space: nowrap;
-      margin-top: 2px;
-    }
-    .item-details h4 {
-      font-size: 0.82rem;
-      color: var(--text-light);
-      margin-bottom: 2px;
-    }
-    .item-details p {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* Dress Code & Palette */
-    .dress-code-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(229, 190, 122, 0.25);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
       margin-bottom: 20px;
     }
-    .palette-swatches {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .swatch {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.4);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    /* Venue & Live Map */
-    .venue-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(226, 143, 162, 0.2);
+    .location-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 16px;
-      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(29, 67, 85, 0.1);
     }
-    .map-embed {
-      width: 100%;
-      height: 160px;
-      border-radius: 10px;
-      border: 1px solid rgba(226, 143, 162, 0.25);
-      margin: 10px 0;
+    .location-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
     }
-    .venue-address-block {
+    .location-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--lake-deep);
+      font-weight: 700;
+    }
+    .location-badge {
+      font-size: 0.62rem;
+      background: rgba(223, 173, 134, 0.25);
+      border: 1px solid var(--sandstone-gold);
+      color: var(--text-gold);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    .location-address {
       font-size: 0.72rem;
       color: var(--text-muted);
       line-height: 1.45;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
-    .parking-tag {
-      font-size: 0.7rem;
-      color: var(--text-gold);
+    .btn-maps-direct {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(223, 173, 134, 0.25), rgba(50, 105, 130, 0.15));
+      border: 1px solid var(--sandstone-gold);
+      color: var(--lake-deep);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 9px 12px;
+      border-radius: 10px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 4px;
-      margin-top: 4px;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-maps-direct:active {
+      transform: scale(0.98);
+      background: var(--sandstone-arch);
+      color: #fff;
     }
 
     /* Action Buttons */
@@ -544,12 +590,14 @@
     }
     .btn-action:active { transform: scale(0.97); }
     .btn-rsvp {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      background: linear-gradient(135deg, #1f4e3f 0%, #123026 100%);
       color: #fff;
+      box-shadow: 0 4px 12px rgba(31, 78, 63, 0.25);
     }
     .btn-cal {
-      background: linear-gradient(135deg, #e5be7a 0%, #b8862d 100%);
-      color: #120d11;
+      background: linear-gradient(135deg, var(--sandstone-arch) 0%, var(--sandstone-gold) 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(201, 147, 101, 0.25);
     }
 
     .replay-btn {
@@ -560,22 +608,23 @@
       margin: 14px auto 0;
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--lake-deep);
       font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    /* Modal Backdrop */
+    /* Modal Styling */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(6px);
+      background: rgba(29, 67, 85, 0.6);
+      backdrop-filter: blur(8px);
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
@@ -585,43 +634,97 @@
       visibility: visible;
     }
     .modal-box {
-      background: #1e1319;
-      border: 1px solid var(--pink-primary);
-      border-radius: 18px;
+      background: #ffffff;
+      border: 1.5px solid var(--sandstone-gold);
+      border-radius: 20px;
       width: 100%;
-      max-width: 360px;
-      padding: 20px;
+      max-width: 390px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px 18px;
       position: relative;
+      box-shadow: 0 12px 40px rgba(29, 67, 85, 0.35);
     }
     .modal-close {
       position: absolute;
       top: 14px;
       right: 14px;
-      background: none;
-      border: none;
-      color: var(--text-muted);
+      background: rgba(29, 67, 85, 0.08);
+      border: 1px solid rgba(29, 67, 85, 0.15);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--lake-deep);
       cursor: pointer;
     }
-    .theme-list {
+
+    .modal-day-badge {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: var(--lotus-pink);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .modal-day-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      color: var(--lake-deep);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .modal-vibe-pill {
+      display: inline-block;
+      background: var(--lotus-soft);
+      border: 1px solid var(--lotus-pink);
+      color: var(--lotus-pink);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .modal-timeline-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 10px;
     }
-    .theme-option {
+    .modal-timeline-item {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      cursor: pointer;
-      border: 1px solid transparent;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(234, 243, 248, 0.6);
+      border: 1px solid rgba(201, 147, 101, 0.2);
+      border-radius: 12px;
+      padding: 10px 12px;
     }
-    .theme-thumb {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+    .modal-item-time {
+      background: linear-gradient(135deg, rgba(223, 173, 134, 0.35), rgba(50, 105, 130, 0.2));
+      border: 1px solid var(--sandstone-gold);
+      color: var(--lake-deep);
+      font-size: 0.66rem;
+      font-weight: 700;
+      padding: 4px 7px;
+      border-radius: 6px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .modal-item-info h4 {
+      font-size: 0.8rem;
+      color: var(--lake-deep);
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+    .modal-item-info p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.35;
     }
   </style>
 </head>
@@ -629,26 +732,32 @@
 
   <div class="app-viewport" id="viewport">
     
+    <!-- Canvas for Floating Peacock Feathers -->
+    <canvas id="feathersCanvas"></canvas>
+
     <!-- Top Navigation -->
     <header class="top-nav">
       <div class="brand-title">
-        <i data-lucide="sparkles" size="16"></i> INVITESTORY
+        <i data-lucide="sparkles" size="16"></i> #ANKASH
       </div>
       <div class="nav-buttons">
-        <button class="btn-chip music-btn" id="musicBtn" onclick="toggleAudio()" title="Toggle Romantic Ambient Music">
+        <button class="btn-chip music-btn" id="musicBtn" onclick="toggleAudio()" title="Toggle Shehnai Chimes">
           <i data-lucide="music" size="14"></i>
-        </button>
-        <button class="btn-chip" onclick="openThemeModal()">
-          <i data-lucide="layout-grid" size="12"></i> Door Style
         </button>
       </div>
     </header>
 
-    <!-- 3D Door Portal Screen -->
+    <!-- 3D Opening Door Portal with Radha Krishna Split -->
     <div class="door-portal-overlay" id="doorPortal">
       <div class="arch-frame">
-        <div class="door-panel door-left" id="doorL"><div class="door-handle"></div></div>
-        <div class="door-panel door-right" id="doorR"><div class="door-handle"></div></div>
+        <!-- Left Door Half -->
+        <div class="door-panel door-left" id="doorL">
+          <div class="door-handle"></div>
+        </div>
+        <!-- Right Door Half -->
+        <div class="door-panel door-right" id="doorR">
+          <div class="door-handle"></div>
+        </div>
       </div>
 
       <div class="portal-action" id="portalAction">
@@ -656,153 +765,142 @@
           <i data-lucide="key" size="24"></i>
         </div>
         <div class="portal-text">Tap To Open</div>
-        <div class="portal-sub">An Invitation Awaits</div>
+        <div class="portal-sub">An Auspicious Wedding Awaits</div>
       </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Content Body -->
     <main class="invitation-body">
       
+      <!-- Couple Intro Card -->
       <div class="hero-card">
+        <div class="ganesh-shloka">॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ॥</div>
         <div class="card-top-tag">Together With Their Families</div>
         <h1 class="names-title">
           Ankita
           <span>&</span>
           Ashish
         </h1>
-        <p class="invitation-sub">Request your gracious presence and blessings to celebrate our Engagement Ceremony.</p>
+        <p class="invitation-sub">Cordially invite you to shower your love & blessings as we unite in the sacred bonds of marriage.</p>
 
-        <!-- Couple Photo Carousel -->
-        <div class="carousel-container">
-          <button class="carousel-nav carousel-prev" onclick="prevSlide()"><i data-lucide="chevron-left" size="16"></i></button>
-          <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=60" alt="Couple 1" />
-              <div class="carousel-caption">"A journey of love, shared laughter, and forever"</div>
+        <div class="wedding-dates-badge">
+          <div class="dates-primary">October 22 – 25, 2026</div>
+          <span class="dates-sub">Celebration of Love & Traditions</span>
+        </div>
+      </div>
+
+      <!-- SACRED SHRI GANESH TEMPLE STAGE -->
+      <div class="ganesh-stage-wrapper">
+        <div class="temple-arch-top">
+          <div class="ganesh-blessing-header">|| श्री गणेशाय नमः ||</div>
+        </div>
+
+        <!-- Auspicious Shri Ganesh Ji Image Altar -->
+        <div class="ganesh-centerpiece">
+          <div class="ganesh-halo"></div>
+          <div class="ganesh-altar-frame">
+            <img src="ganesh-ji.jpg" alt="Bhagwan Shri Ganesh Ji" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1567591414240-e9a1175ebda7?w=500&auto=format&fit=crop&q=80';" />
+          </div>
+          <div class="diyas-row">
+            <span>🪔 शुभ</span>
+            <span>✨ लाभ ✨</span>
+            <span>लाभ 🪔</span>
+          </div>
+        </div>
+
+        <div class="temple-subtext">"Under the divine blessings of Lord Ganesha, tap an invitation card to reveal each day's program"</div>
+
+        <!-- The 4 Hanging Event Cards -->
+        <div class="hanging-cards-grid">
+          
+          <!-- Card 1 -->
+          <div class="hanging-card-unit" onclick="openEventModal('day1')">
+            <div class="card-string"></div>
+            <div class="mini-card-pendant">
+              <div class="card-tag">Day 1 • 22nd Oct</div>
+              <div class="card-day-num">Engagement</div>
+              <div class="card-event-name">Cocktail & Ring Ceremony</div>
+              <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
             </div>
-            <div class="carousel-slide">
-              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=60" alt="Couple 2" />
-              <div class="carousel-caption">Two souls uniting in celebration</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="hanging-card-unit" onclick="openEventModal('day2')">
+            <div class="card-string"></div>
+            <div class="mini-card-pendant">
+              <div class="card-tag">Day 2 • 23rd Oct</div>
+              <div class="card-day-num">Haldi</div>
+              <div class="card-event-name">Haldi Extravaganza & Dhol</div>
+              <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
             </div>
           </div>
-          <button class="carousel-nav carousel-next" onclick="nextSlide()"><i data-lucide="chevron-right" size="16"></i></button>
-        </div>
 
-        <!-- Scratch-to-Reveal Date -->
-        <div class="scratch-wrapper">
-          <div class="scratch-container">
-            <div class="scratch-secret">
-              <span class="secret-day">Friday</span>
-              <span class="secret-date">OCTOBER 16, 2026</span>
-              <span class="secret-time">6:00 PM Onwards</span>
+          <!-- Card 3 -->
+          <div class="hanging-card-unit" onclick="openEventModal('day3')">
+            <div class="card-string"></div>
+            <div class="mini-card-pendant">
+              <div class="card-tag">Day 3 • 24th Oct</div>
+              <div class="card-day-num">Mehendi & Sangeet</div>
+              <div class="card-event-name">Henna Art & Musical Night</div>
+              <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
             </div>
-            <canvas id="scratch-canvas"></canvas>
           </div>
-          <button class="quick-reveal-btn" onclick="revealDateInstant()">✨ Scratch / Quick Reveal Date</button>
-        </div>
 
-        <!-- Countdown Timer -->
-        <div class="countdown-grid">
-          <div class="time-pill"><div class="time-num" id="days">00</div><div class="time-lbl">Days</div></div>
-          <div class="time-pill"><div class="time-num" id="hours">00</div><div class="time-lbl">Hours</div></div>
-          <div class="time-pill"><div class="time-num" id="mins">00</div><div class="time-lbl">Mins</div></div>
-          <div class="time-pill"><div class="time-num" id="secs">00</div><div class="time-lbl">Secs</div></div>
+          <!-- Card 4 -->
+          <div class="hanging-card-unit" onclick="openEventModal('day4')">
+            <div class="card-string"></div>
+            <div class="mini-card-pendant">
+              <div class="card-tag">Day 4 • 25th Oct</div>
+              <div class="card-day-num">Grand Wedding</div>
+              <div class="card-event-name">Mandha, Baarat & Sacred Pheras</div>
+              <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Dress Code & Color Palette -->
-      <div class="dress-code-card">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--text-gold); font-weight:700;">
-          <i data-lucide="sparkles" size="14"></i> Dress Code: Indian Festive / Pastels
+      <!-- EVENT LOCATIONS & DIRECT GOOGLE MAPS -->
+      <div class="section-title">Event Locations</div>
+      <div class="locations-container">
+        
+        <!-- Engagement Venue -->
+        <div class="location-box">
+          <div class="location-header">
+            <div class="location-title">Engagement Venue</div>
+            <span class="location-badge">22nd Oct</span>
+          </div>
+          <div class="location-address">
+            Survey no 82, 100 feet road, Village More Manvelpada, Ekvira Darshan, Virar East, Vasai-Virar, Maharashtra 401209
+          </div>
+          <a href="https://maps.app.goo.gl/EwS3CNRmDyJnR6k46" target="_blank" class="btn-maps-direct">
+            <i data-lucide="map-pin" size="14"></i> Open Engagement Location on Google Maps
+          </a>
         </div>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">Join the festivities in soft tones and traditional attire.</p>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#f4c2c2;" title="Blush Rose"></div>
-          <div class="swatch" style="background:#e5be7a;" title="Warm Gold"></div>
-          <div class="swatch" style="background:#cbe3db;" title="Mint Sage"></div>
-          <div class="swatch" style="background:#e8dff5;" title="Lavender Mist"></div>
+
+        <!-- Wedding Venue -->
+        <div class="location-box">
+          <div class="location-header">
+            <div class="location-title">Wedding Venue</div>
+            <span class="location-badge">25th Oct</span>
+          </div>
+          <div class="location-address">
+            Apmc market d building, Kalyan banquet, Durgadi Ft Marg, opp. fanos dhaba, near patripool, Bhoiwada, Kalyan, Maharashtra 421301
+          </div>
+          <a href="https://maps.app.goo.gl/UGmxVUknbRVvLjyk9" target="_blank" class="btn-maps-direct">
+            <i data-lucide="map-pin" size="14"></i> Open Wedding Location on Google Maps
+          </a>
         </div>
+
       </div>
 
-      <!-- Detailed Event Timeline -->
-      <div class="section-title">Program Timeline</div>
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <div class="item-time">6:00 PM</div>
-          <div class="item-details">
-            <h4>Guest Arrival</h4>
-            <p>Welcome drinks, greetings & delicious starters.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">7:30 PM</div>
-          <div class="item-details">
-            <h4>Grand Entry</h4>
-            <p>Grand entry of the bride and groom.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">7:45 PM</div>
-          <div class="item-details">
-            <h4>Ring Ceremony</h4>
-            <p>Exchange of rings and family blessings.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">8:15 PM</div>
-          <div class="item-details">
-            <h4>Performances</h4>
-            <p>Celebratory stage performances by family & friends.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">8:45 PM – 10:30 PM</div>
-          <div class="item-details">
-            <h4>Royal Dinner</h4>
-            <p>DJ dinner announcement at 8:45 PM; enjoy hot food while performances continue.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">10:30 PM – 12:00 AM</div>
-          <div class="item-details">
-            <h4>Open Floor / DJ</h4>
-            <p>Dance floor opens for everyone to celebrate!</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="item-time">11:50 PM</div>
-          <div class="item-details">
-            <h4>Cake Cutting</h4>
-            <p>Sweet celebration and midnight toasts.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Venue & Embedded Live Map -->
-      <div class="venue-card">
-        <div style="font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--text-gold); font-weight:700;">
-          Le Vivanta Banquet
-        </div>
-        <div class="venue-address-block">
-          Manvelpada, Virar East — CRQC+HQC, Smriti Height, Backside More Gaov Talav, Virar East Railway Station Rd, Ekvira Darshan, Virar East, Vasai-Virar, Maharashtra 401209
-        </div>
-        <iframe 
-          class="map-embed" 
-          src="https://maps.google.com/maps?q=19.4638,72.8139&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-          loading="lazy">
-        </iframe>
-        <div class="parking-tag">
-          <i data-lucide="map-pin" size="14"></i> Located right behind More Gaov Talav, Virar East
-        </div>
-      </div>
-
-      <!-- Action Buttons: WhatsApp RSVP & Smart Calendar -->
+      <!-- Action Buttons: WhatsApp RSVP & Smart Device Calendar -->
       <div class="action-row">
         <button class="btn-action btn-rsvp" onclick="openWhatsAppRSVP()">
           <i data-lucide="message-circle" size="16"></i> RSVP WhatsApp
         </button>
         <button class="btn-action btn-cal" onclick="addToCalendar()">
-          <i data-lucide="calendar" size="16"></i> Save Date
+          <i data-lucide="calendar" size="16"></i> Save All Dates
         </button>
       </div>
 
@@ -814,28 +912,12 @@
 
   </div>
 
-  <!-- Door Style Switcher Modal -->
-  <div class="modal-backdrop" id="themeModal">
+  <!-- POPUP MODAL FOR EVENT TIMELINES -->
+  <div class="modal-backdrop" id="eventModal">
     <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('themeModal')"><i data-lucide="x" size="18"></i></button>
-      <h3 style="font-family:'Cormorant Garamond', serif; color: var(--text-gold); font-size: 1.3rem;">Select Door Style</h3>
-      <div class="theme-list">
-        <div class="theme-option" onclick="changeDoorTheme('pink')">
-          <div class="theme-thumb" style="background: linear-gradient(135deg, #e491a6, #c46882);"></div>
-          <div><div style="font-size:0.8rem; font-weight:600;">Blush Floral (Default)</div></div>
-        </div>
-        <div class="theme-option" onclick="changeDoorTheme('emerald')">
-          <div class="theme-thumb" style="background: linear-gradient(135deg, #2b7a66, #123d32);"></div>
-          <div><div style="font-size:0.8rem; font-weight:600;">Emerald Arch</div></div>
-        </div>
-        <div class="theme-option" onclick="changeDoorTheme('royal')">
-          <div class="theme-thumb" style="background: linear-gradient(135deg, #264a7f, #142442);"></div>
-          <div><div style="font-size:0.8rem; font-weight:600;">Royal Mediterranean</div></div>
-        </div>
-        <div class="theme-option" onclick="changeDoorTheme('gold')">
-          <div class="theme-thumb" style="background: linear-gradient(135deg, #ffd000, #b8862d);"></div>
-          <div><div style="font-size:0.8rem; font-weight:600;">Gold Arabesque</div></div>
-        </div>
+      <button class="modal-close" onclick="closeModal('eventModal')"><i data-lucide="x" size="16"></i></button>
+      <div id="modalEventContent">
+        <!-- Injected via JavaScript -->
       </div>
     </div>
   </div>
@@ -843,7 +925,211 @@
   <script>
     lucide.createIcons();
 
-    /* Romantic Ambient Audio Chimes */
+    /* Events Data */
+    const eventDetails = {
+      day1: {
+        badge: "Day 1 • 22nd October 2026",
+        title: "Engagement & Cocktail Evening",
+        vibe: "Elegant, celebratory, high-energy party",
+        hasVenue: true,
+        venue: "Survey no 82, 100 feet road, Village More Manvelpada, Virar East",
+        mapLink: "https://maps.app.goo.gl/EwS3CNRmDyJnR6k46",
+        timeline: [
+          { time: "6:00 PM", title: "Guest Arrival & Welcome", desc: "Welcome drinks, meet & greet, and passed hot starters begin." },
+          { time: "7:30 PM", title: "Grand Entry", desc: "Grand entrance of the couple." },
+          { time: "7:45 PM", title: "Ring Ceremony", desc: "Ring exchange followed by family blessings on stage." },
+          { time: "8:15 PM", title: "Performances", desc: "Curated dance and stage performances by family & friends." },
+          { time: "8:45 PM – 10:30 PM", title: "Royal Dinner Buffet", desc: "DJ announces dinner at 8:45 PM; hot food served alongside ongoing stage action." },
+          { time: "10:30 PM – 12:00 AM", title: "Open Dance Floor", desc: "DJ turns up the tempo; open floor for all guests to celebrate." },
+          { time: "11:50 PM", title: "Cake Cutting", desc: "Midnight toasts, sweet celebration, and closing photos." }
+        ]
+      },
+      day2: {
+        badge: "Day 2 • 23rd October 2026",
+        title: "Haldi Extravaganza",
+        vibe: "Dress Code: Shades of Yellow | Vibrant, floral, dhol beats & dancing",
+        hasVenue: false,
+        timeline: [
+          { time: "4:00 PM", title: "Guest Welcome", desc: "Guests arrive in yellow; refreshments and light bites served." },
+          { time: "4:30 PM", title: "Haldi Rituals", desc: "Ceremonial haldi application, blessings, and family photo ops." },
+          { time: "5:30 PM – 8:00 PM", title: "Dhol & Haldi Dance Floor", desc: "Prepared family dance routines kick off, followed by open-floor dancing." },
+          { time: "8:00 PM – 10:00 PM", title: "Dinner Buffet", desc: "Delicious hot dinner served as celebrations wrap up for the night." }
+        ]
+      },
+      day3: {
+        badge: "Day 3 • 24th October 2026",
+        title: "Mehendi & Sangeet Night",
+        vibe: "Henna artistry, festive melodies, and celebratory dancing",
+        hasVenue: false,
+        timeline: [
+          { time: "4:00 PM", title: "Arrival & Mehendi Application", desc: "Welcome drinks served; dedicated mehendi artist stations open for all ladies." },
+          { time: "5:30 PM – 8:00 PM", title: "Music & Sangeet Beats", desc: "Festive playlist sets the tempo; group dancing, music, and social fun." },
+          { time: "8:00 PM – 10:00 PM", title: "Dinner & Celebration", desc: "Dinner buffet open for all guests while music and festivities continue." }
+        ]
+      },
+      day4: {
+        badge: "Day 4 • 25th October 2026",
+        title: "Grand Wedding Ceremony & Reception",
+        vibe: "Traditional Vedic auspicious rituals & grand celebrations",
+        hasVenue: true,
+        venue: "Kalyan banquet, Durgadi Ft Marg, opp. fanos dhaba, near patripool, Bhoiwada, Kalyan",
+        mapLink: "https://maps.app.goo.gl/UGmxVUknbRVvLjyk9",
+        timeline: [
+          { time: "10:00 AM – 1:00 PM", title: "Mandha Ceremony", desc: "Auspicious morning pooja and pre-wedding traditional rituals." },
+          { time: "3:00 PM – 7:00 PM", title: "Baarat Transit", desc: "Departure & travel procession heading towards the wedding venue." },
+          { time: "7:00 PM – 8:30 PM", title: "Baarat Arrival & Welcome Snacks", desc: "Grand welcome of the Baarat, welcome drinks, and live appetizer counters." },
+          { time: "9:00 PM", title: "Grand Bride & Groom Entry", desc: "Dramatic royal entry of the bride and groom." },
+          { time: "9:15 PM", title: "Ceremonial Jaimala", desc: "Exchange of the auspicious floral garlands on stage." },
+          { time: "8:30 PM – 11:00 PM", title: "Grand Wedding Dinner Spread", desc: "Royal dinner buffet open for all guests." },
+          { time: "2:00 AM Onwards", title: "Sacred Pheras & Vivah Sanskar", desc: "Vedic wedding rituals, Saat Phere, Kanyadaan, and Sindoor Daan at the mandap." }
+        ]
+      }
+    };
+
+    function openEventModal(dayKey) {
+      const data = eventDetails[dayKey];
+      if (!data) return;
+
+      let venueHtml = '';
+      if (data.hasVenue) {
+        venueHtml = `
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
+            <strong style="color:var(--lake-deep);">Venue:</strong> ${data.venue}
+          </div>
+          <a href="${data.mapLink}" target="_blank" class="btn-maps-direct" style="margin-bottom:16px;">
+            <i data-lucide="map-pin" size="14"></i> Open Venue in Google Maps
+          </a>
+        `;
+      }
+
+      let timelineHtml = data.timeline.map(item => `
+        <div class="modal-timeline-item">
+          <div class="modal-item-time">${item.time}</div>
+          <div class="modal-item-info">
+            <h4>${item.title}</h4>
+            <p>${item.desc}</p>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('modalEventContent').innerHTML = `
+        <div class="modal-day-badge">${data.badge}</div>
+        <h3 class="modal-day-title">${data.title}</h3>
+        <div class="modal-vibe-pill"><i data-lucide="sparkles" size="12" style="display:inline; vertical-align:middle;"></i> ${data.vibe}</div>
+        
+        ${venueHtml}
+
+        <div style="font-size:0.75rem; letter-spacing:1px; color:var(--lake-deep); text-transform:uppercase; margin-bottom:8px; font-weight:700;">
+          Event Timeline
+        </div>
+        <div class="modal-timeline-list">
+          ${timelineHtml}
+        </div>
+      `;
+
+      lucide.createIcons();
+      document.getElementById('eventModal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    /* Falling Peacock Feathers Simulation (Set to 10 feathers) */
+    const fCanvas = document.getElementById('feathersCanvas');
+    const fCtx = fCanvas.getContext('2d');
+    let feathers = [];
+
+    function resizeFeathersCanvas() {
+      fCanvas.width = fCanvas.offsetWidth;
+      fCanvas.height = fCanvas.offsetHeight;
+    }
+    window.addEventListener('resize', resizeFeathersCanvas);
+    resizeFeathersCanvas();
+
+    class PeacockFeather {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * fCanvas.width;
+        this.y = -30 - Math.random() * 60;
+        this.length = 26 + Math.random() * 16;
+        this.speedY = 0.8 + Math.random() * 1.2;
+        this.angle = (Math.random() - 0.5) * 45;
+        this.angularSpeed = (Math.random() - 0.5) * 1.5;
+        this.swaySpeed = 0.02 + Math.random() * 0.02;
+        this.swayOffset = Math.random() * Math.PI * 2;
+        this.opacity = 0.55 + Math.random() * 0.35;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * this.swaySpeed + this.swayOffset) * 0.9;
+        this.angle += this.angularSpeed;
+        if (this.y > fCanvas.height + 40) {
+          this.reset();
+        }
+      }
+      draw() {
+        fCtx.save();
+        fCtx.translate(this.x, this.y);
+        fCtx.rotate((this.angle * Math.PI) / 180);
+        fCtx.globalAlpha = this.opacity;
+
+        const L = this.length;
+
+        // Quill
+        fCtx.beginPath();
+        fCtx.moveTo(0, L / 2);
+        fCtx.quadraticCurveTo(2, 0, 0, -L / 2);
+        fCtx.strokeStyle = '#dfad86';
+        fCtx.lineWidth = 1.2;
+        fCtx.stroke();
+
+        // Outer Vane (Emerald)
+        fCtx.beginPath();
+        fCtx.ellipse(0, -L * 0.15, L * 0.28, L * 0.35, 0, 0, Math.PI * 2);
+        fCtx.fillStyle = '#1f4e3f';
+        fCtx.fill();
+
+        // Inner Gold Halo
+        fCtx.beginPath();
+        fCtx.ellipse(0, -L * 0.18, L * 0.18, L * 0.22, 0, 0, Math.PI * 2);
+        fCtx.fillStyle = '#dfad86';
+        fCtx.fill();
+
+        // Navy Center
+        fCtx.beginPath();
+        fCtx.ellipse(0, -L * 0.19, L * 0.1, L * 0.13, 0, 0, Math.PI * 2);
+        fCtx.fillStyle = '#1d4355';
+        fCtx.fill();
+
+        // Turquoise Eye
+        fCtx.beginPath();
+        fCtx.arc(0, -L * 0.19, L * 0.05, 0, Math.PI * 2);
+        fCtx.fillStyle = '#326982';
+        fCtx.fill();
+
+        fCtx.restore();
+      }
+    }
+
+    // 10 Feathers
+    for (let i = 0; i < 10; i++) {
+      feathers.push(new PeacockFeather());
+    }
+
+    function animateFeathers() {
+      fCtx.clearRect(0, 0, fCanvas.width, fCanvas.height);
+      feathers.forEach(feather => {
+        feather.update();
+        feather.draw();
+      });
+      requestAnimationFrame(animateFeathers);
+    }
+    animateFeathers();
+
+    /* Ambient Festive Audio Chimes */
     let audioCtx = null;
     let isAudioPlaying = false;
     let musicInterval = null;
@@ -917,96 +1203,25 @@
       document.getElementById('viewport').scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Photo Slider */
-    let currentSlide = 0;
-    function showSlide(index) {
-      const track = document.getElementById('carouselTrack');
-      const total = track.children.length;
-      if (index >= total) currentSlide = 0;
-      else if (index < 0) currentSlide = total - 1;
-      else currentSlide = index;
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
-
-    /* Scratch Card */
-    const canvas = document.getElementById('scratch-canvas');
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-    let isRevealed = false;
-
-    function initScratchCard() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      ctx.fillStyle = '#bfa15f';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = '600 13px Montserrat';
-      ctx.fillStyle = '#1c1218';
-      ctx.textAlign = 'center';
-      ctx.fillText('✨ SCRATCH TO REVEAL DATE ✨', canvas.width / 2, canvas.height / 2 + 5);
-    }
-
-    function scratch(e) {
-      if (!isDrawing || isRevealed) return;
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(x, y, 20, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    canvas.addEventListener('mousedown', () => isDrawing = true);
-    canvas.addEventListener('mouseup', () => isDrawing = false);
-    canvas.addEventListener('mousemove', scratch);
-    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
-    canvas.addEventListener('touchend', () => isDrawing = false);
-    canvas.addEventListener('touchmove', scratch);
-
-    function revealDateInstant() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      isRevealed = true;
-    }
-
-    /* Target Event Date: October 16, 2026 @ 6:00 PM IST */
-    const targetEventDate = new Date("October 16, 2026 18:00:00").getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetEventDate - now;
-      if (distance < 0) return;
-      document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
-      document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById("mins").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      document.getElementById("secs").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    /* WhatsApp RSVP Direct Link */
+    /* WhatsApp RSVP Link */
     function openWhatsAppRSVP() {
       const text = encodeURIComponent(
-        "Hi Ankita & Ashish! ✨ I would love to attend your Engagement Ceremony on Friday, October 16th, 2026 at Le Vivanta Banquet, Virar East. Looking forward to celebrating with you both!"
+        "Hi Ankita & Ashish! ✨ We are delighted to RSVP for your wedding celebrations (October 22–25, 2026). Looking forward to celebrating with you both!"
       );
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
-    /* Device-Aware Calendar Integration (iOS Apple Calendar vs Google Calendar) */
+    /* Multi-Day Calendar Integration */
     function addToCalendar() {
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-      const title = "Engagement of Ankita & Ashish";
-      const details = "Celebrate the Engagement Ceremony of Ankita & Ashish at Le Vivanta Banquet, Virar East.";
-      const location = "Le Vivanta Banquet, Manvelpada, Virar East, Vasai-Virar, Maharashtra 401209";
+      const title = "Wedding Celebrations of Ankita & Ashish";
+      const details = "Celebrate the multi-day wedding festivities of Ankita & Ashish (Engagement, Haldi, Sangeet & Grand Wedding).";
+      const location = "Virar East & Kalyan, Maharashtra";
       
-      const startUTC = "20261016T123000Z";
-      const endUTC = "20261016T183000Z";
+      const startUTC = "20261022T123000Z";
+      const endUTC = "20261026T043000Z";
 
       if (isIOS) {
         const icsData = [
@@ -1026,7 +1241,7 @@
         const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.setAttribute("download", "Ankita_Ashish_Engagement.ics");
+        link.setAttribute("download", "Ankita_Ashish_Wedding_Celebrations.ics");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -1040,30 +1255,6 @@
         window.open(gCalUrl, '_blank');
       }
     }
-
-    /* Theme Switcher */
-    function openThemeModal() { document.getElementById('themeModal').classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-    function changeDoorTheme(theme) {
-      const root = document.documentElement;
-      if (theme === 'emerald') {
-        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #2b7a66, #123d32)');
-        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #2b7a66, #123d32)');
-      } else if (theme === 'royal') {
-        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #264a7f, #142442)');
-        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #264a7f, #142442)');
-      } else if (theme === 'gold') {
-        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #ffd000, #b8862d)');
-        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #ffd000, #b8862d)');
-      } else {
-        root.style.setProperty('--door-left-bg', 'linear-gradient(135deg, #e491a6, #c46882)');
-        root.style.setProperty('--door-right-bg', 'linear-gradient(225deg, #e491a6, #c46882)');
-      }
-      closeModal('themeModal');
-      replayDoorAnimation();
-    }
-
-    window.addEventListener('load', initScratchCard);
   </script>
 </body>
 </html>
