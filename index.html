@@ -6,7 +6,7 @@
   <title>Wedding Celebrations | Ankita & Ashish</title>
   <!-- Google Fonts: Cormorant Garamond, Montserrat & Rozha One -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -779,7 +779,7 @@
     <!-- Top Navigation -->
     <header class="top-nav">
       <div class="brand-title">
-        <i data-lucide="sparkles" size="16"></i> #ANKASH
+        <i data-lucide="sparkles" size="16"></i> INVITESTORY
       </div>
       <div class="nav-buttons">
         <button class="btn-chip music-btn" id="musicBtn" onclick="toggleAudio()" title="Toggle Auspicious Shehnai / Chimes">
@@ -1179,10 +1179,11 @@
     }
     animateFeathers();
 
-    /* Ambient Festive Audio Chimes */
+    /* Ambient Festive Audio Chimes with Tab/App-Switch Auto-Pause */
     let audioCtx = null;
     let isAudioPlaying = false;
     let musicInterval = null;
+    let wasPlayingBeforeBackground = false;
 
     function initAudio() {
       if (!audioCtx) {
@@ -1212,6 +1213,7 @@
       isAudioPlaying = true;
       document.getElementById('musicBtn').classList.add('playing');
       
+      clearInterval(musicInterval);
       musicInterval = setInterval(() => {
         if (!isAudioPlaying) return;
         const note = notes[Math.floor(Math.random() * notes.length)];
@@ -1222,17 +1224,50 @@
       }, 1600);
     }
 
+    function stopMusicLoop() {
+      isAudioPlaying = false;
+      clearInterval(musicInterval);
+      document.getElementById('musicBtn').classList.remove('playing');
+      if (audioCtx && audioCtx.state === 'running') {
+        audioCtx.suspend();
+      }
+    }
+
     function toggleAudio() {
       initAudio();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       if (isAudioPlaying) {
-        isAudioPlaying = false;
-        clearInterval(musicInterval);
-        document.getElementById('musicBtn').classList.remove('playing');
+        stopMusicLoop();
       } else {
         startMusicLoop();
       }
     }
+
+    /* Pause audio when browser tab is hidden or user switches apps */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (isAudioPlaying) {
+          wasPlayingBeforeBackground = true;
+          stopMusicLoop();
+        }
+      } else {
+        if (wasPlayingBeforeBackground) {
+          wasPlayingBeforeBackground = false;
+          initAudio();
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume().then(() => startMusicLoop());
+          } else {
+            startMusicLoop();
+          }
+        }
+      }
+    });
+
+    window.addEventListener('pagehide', () => {
+      if (isAudioPlaying) {
+        stopMusicLoop();
+      }
+    });
 
     /* 3D Door Open Trigger: Unlocks Page Scrolling */
     function openDoors() {
