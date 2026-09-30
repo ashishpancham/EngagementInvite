@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      /* Royal Pichwai & Garden Lake Palette from artwork */
+      /* Royal Pichwai & Garden Lake Palette */
       --sky-light: #eaf3f8;
       --sky-soft: #d3e5ef;
       --lake-blue: #326982;
@@ -19,7 +19,6 @@
       --sandstone-gold: #c99365;
       --sandstone-arch: #dfad86;
       --foliage-green: #1f4e3f;
-      --foliage-dark: #123026;
       --lotus-pink: #d9758e;
       --lotus-soft: #fbebf0;
       --text-dark: #1b323c;
@@ -49,6 +48,7 @@
       overflow-x: hidden;
     }
 
+    /* Locked by default until doors open */
     .app-viewport {
       width: 100%;
       max-width: 440px;
@@ -56,10 +56,14 @@
       max-height: 920px;
       background: radial-gradient(circle at 50% 10%, var(--sky-light) 0%, var(--sky-soft) 55%, #c0d8e6 100%);
       position: relative;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden; /* Scroll locked initially */
       box-shadow: 0 0 50px rgba(0,0,0,0.6);
       scroll-behavior: smooth;
+    }
+
+    .app-viewport.unlocked {
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     /* Falling Peacock Feathers Canvas */
@@ -138,13 +142,16 @@
       50% { transform: scale(1.08); }
     }
 
-    /* 3D Door Portal */
+    /* Full-Screen Lock Door Portal */
     .door-portal-overlay {
-      position: absolute;
+      position: fixed;
       top: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
+      max-width: 440px;
       height: 100%;
+      max-height: 920px;
       z-index: 40;
       perspective: 1400px;
       display: flex;
@@ -152,6 +159,7 @@
       align-items: center;
       background: radial-gradient(circle at center, #2e4d5d 0%, #152731 100%);
       transition: visibility 1.2s, opacity 1.2s;
+      touch-action: none; /* Prevents scroll gestures on door */
     }
     .door-portal-overlay.opened {
       opacity: 0;
@@ -355,7 +363,6 @@
       text-shadow: 0 0 10px rgba(201, 147, 101, 0.25);
     }
 
-    /* Ganesha Portrait Frame */
     .ganesh-centerpiece {
       display: flex;
       flex-direction: column;
@@ -738,7 +745,7 @@
     <!-- Top Navigation -->
     <header class="top-nav">
       <div class="brand-title">
-        <i data-lucide="sparkles" size="16"></i> #ANKASH
+        <i data-lucide="sparkles" size="16"></i> INVITESTORY
       </div>
       <div class="nav-buttons">
         <button class="btn-chip music-btn" id="musicBtn" onclick="toggleAudio()" title="Toggle Shehnai Chimes">
@@ -747,7 +754,7 @@
       </div>
     </header>
 
-    <!-- 3D Opening Door Portal with Radha Krishna Split -->
+    <!-- 3D Opening Door Portal with Radha Krishna Split (Fixed overlay until opened) -->
     <div class="door-portal-overlay" id="doorPortal">
       <div class="arch-frame">
         <!-- Left Door Half -->
@@ -769,7 +776,7 @@
       </div>
     </div>
 
-    <!-- Main Content Body -->
+    <!-- Main Content Body (Revealed after opening doors) -->
     <main class="invitation-body">
       
       <!-- Couple Intro Card -->
@@ -784,7 +791,7 @@
         <p class="invitation-sub">Cordially invite you to shower your love & blessings as we unite in the sacred bonds of marriage.</p>
 
         <div class="wedding-dates-badge">
-          <div class="dates-primary">October 22 – 25, 2026</div>
+          <div class="dates-primary">November 22 – 25, 2026</div>
           <span class="dates-sub">Celebration of Love & Traditions</span>
         </div>
       </div>
@@ -803,7 +810,7 @@
           </div>
           <div class="diyas-row">
             <span>🪔 शुभ</span>
-            <span>✨  ✨</span>
+            <span>✨ लाभ ✨</span>
             <span>लाभ 🪔</span>
           </div>
         </div>
@@ -817,7 +824,7 @@
           <div class="hanging-card-unit" onclick="openEventModal('day1')">
             <div class="card-string"></div>
             <div class="mini-card-pendant">
-              <div class="card-tag">Day 1 • 22nd Oct</div>
+              <div class="card-tag">Day 1 • 22nd Nov</div>
               <div class="card-day-num">Engagement</div>
               <div class="card-event-name">Cocktail & Ring Ceremony</div>
               <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
@@ -828,7 +835,7 @@
           <div class="hanging-card-unit" onclick="openEventModal('day2')">
             <div class="card-string"></div>
             <div class="mini-card-pendant">
-              <div class="card-tag">Day 2 • 23rd Oct</div>
+              <div class="card-tag">Day 2 • 23rd Nov</div>
               <div class="card-day-num">Haldi</div>
               <div class="card-event-name">Haldi Extravaganza & Dhol</div>
               <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
@@ -839,7 +846,7 @@
           <div class="hanging-card-unit" onclick="openEventModal('day3')">
             <div class="card-string"></div>
             <div class="mini-card-pendant">
-              <div class="card-tag">Day 3 • 24th Oct</div>
+              <div class="card-tag">Day 3 • 24th Nov</div>
               <div class="card-day-num">Mehendi & Sangeet</div>
               <div class="card-event-name">Henna Art & Musical Night</div>
               <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
@@ -850,7 +857,7 @@
           <div class="hanging-card-unit" onclick="openEventModal('day4')">
             <div class="card-string"></div>
             <div class="mini-card-pendant">
-              <div class="card-tag">Day 4 • 25th Oct</div>
+              <div class="card-tag">Day 4 • 25th Nov</div>
               <div class="card-day-num">Grand Wedding</div>
               <div class="card-event-name">Mandha, Baarat & Sacred Pheras</div>
               <div class="card-tap-hint"><i data-lucide="sparkles" size="10"></i> Open Card</div>
@@ -864,16 +871,16 @@
       <div class="section-title">Event Locations</div>
       <div class="locations-container">
         
-        <!-- Engagement Venue -->
+        <!-- Updated Engagement Venue -->
         <div class="location-box">
           <div class="location-header">
             <div class="location-title">Engagement Venue</div>
-            <span class="location-badge">22nd Oct</span>
+            <span class="location-badge">22nd Nov</span>
           </div>
           <div class="location-address">
-            Le Vivanta Banquet,Survey no 82, 100 feet road, Village More Manvelpada, Ekvira Darshan, Virar East, Vasai-Virar, Maharashtra 401209
+            VISHNU BANQUET, D Mart Rd, YK Nagar NX Rd, near D-MART, opposite to POONAM ANNEXE, Virar West, Vasai-Virar, Maharashtra 401303
           </div>
-          <a href="https://maps.app.goo.gl/EwS3CNRmDyJnR6k46" target="_blank" class="btn-maps-direct">
+          <a href="https://maps.app.goo.gl/rgXKoFnWy3r6AUFu8" target="_blank" class="btn-maps-direct">
             <i data-lucide="map-pin" size="14"></i> Open Engagement Location on Google Maps
           </a>
         </div>
@@ -882,10 +889,10 @@
         <div class="location-box">
           <div class="location-header">
             <div class="location-title">Wedding Venue</div>
-            <span class="location-badge">25th Oct</span>
+            <span class="location-badge">25th Nov</span>
           </div>
           <div class="location-address">
-            Kalyan Banquet Hall, Apmc market d building, Kalyan banquet, Durgadi Ft Marg, opp. fanos dhaba, near patripool, Bhoiwada, Kalyan, Maharashtra 421301
+            Apmc market d building, Kalyan banquet, Durgadi Ft Marg, opp. fanos dhaba, near patripool, Bhoiwada, Kalyan, Maharashtra 421301
           </div>
           <a href="https://maps.app.goo.gl/UGmxVUknbRVvLjyk9" target="_blank" class="btn-maps-direct">
             <i data-lucide="map-pin" size="14"></i> Open Wedding Location on Google Maps
@@ -925,15 +932,15 @@
   <script>
     lucide.createIcons();
 
-    /* Events Data */
+    /* Events Data (All updated to November) */
     const eventDetails = {
       day1: {
-        badge: "Day 1 • 22nd October 2026",
+        badge: "Day 1 • 22nd November 2026",
         title: "Engagement & Cocktail Evening",
         vibe: "Elegant, celebratory, high-energy party",
         hasVenue: true,
-        venue: "Survey no 82, 100 feet road, Village More Manvelpada, Virar East",
-        mapLink: "https://maps.app.goo.gl/EwS3CNRmDyJnR6k46",
+        venue: "VISHNU BANQUET, D Mart Rd, YK Nagar NX Rd, near D-MART, opposite to POONAM ANNEXE, Virar West",
+        mapLink: "https://maps.app.goo.gl/rgXKoFnWy3r6AUFu8",
         timeline: [
           { time: "6:00 PM", title: "Guest Arrival & Welcome", desc: "Welcome drinks, meet & greet, and passed hot starters begin." },
           { time: "7:30 PM", title: "Grand Entry", desc: "Grand entrance of the couple." },
@@ -945,7 +952,7 @@
         ]
       },
       day2: {
-        badge: "Day 2 • 23rd October 2026",
+        badge: "Day 2 • 23rd November 2026",
         title: "Haldi Extravaganza",
         vibe: "Dress Code: Shades of Yellow | Vibrant, floral, dhol beats & dancing",
         hasVenue: false,
@@ -957,7 +964,7 @@
         ]
       },
       day3: {
-        badge: "Day 3 • 24th October 2026",
+        badge: "Day 3 • 24th November 2026",
         title: "Mehendi & Sangeet Night",
         vibe: "Henna artistry, festive melodies, and celebratory dancing",
         hasVenue: false,
@@ -968,7 +975,7 @@
         ]
       },
       day4: {
-        badge: "Day 4 • 25th October 2026",
+        badge: "Day 4 • 25th November 2026",
         title: "Grand Wedding Ceremony & Reception",
         vibe: "Traditional Vedic auspicious rituals & grand celebrations",
         hasVenue: true,
@@ -1035,7 +1042,7 @@
       document.getElementById(id).classList.remove('active');
     }
 
-    /* Falling Peacock Feathers Simulation (Set to 10 feathers) */
+    /* Falling Peacock Feathers Simulation (10 Feathers) */
     const fCanvas = document.getElementById('feathersCanvas');
     const fCtx = fCanvas.getContext('2d');
     let feathers = [];
@@ -1114,7 +1121,6 @@
       }
     }
 
-    // 10 Feathers
     for (let i = 0; i < 10; i++) {
       feathers.push(new PeacockFeather());
     }
@@ -1184,7 +1190,7 @@
       }
     }
 
-    /* 3D Door Open Trigger */
+    /* 3D Door Open Trigger: Unlocks Page Scrolling */
     function openDoors() {
       initAudio();
       if (!isAudioPlaying) {
@@ -1193,35 +1199,46 @@
       const portal = document.getElementById('doorPortal');
       portal.classList.add('open');
       document.getElementById('portalAction').style.opacity = '0';
-      setTimeout(() => { portal.classList.add('opened'); }, 1100);
+      
+      setTimeout(() => { 
+        portal.classList.add('opened'); 
+        // Unlock page scrolling only after doors have opened
+        document.getElementById('viewport').classList.add('unlocked');
+      }, 1100);
     }
 
     function replayDoorAnimation() {
       const portal = document.getElementById('doorPortal');
+      const viewport = document.getElementById('viewport');
+      
+      // Lock scroll again & scroll to top
+      viewport.scrollTo({ top: 0, behavior: 'smooth' });
+      viewport.classList.remove('unlocked');
+      
       portal.classList.remove('opened', 'open');
       document.getElementById('portalAction').style.opacity = '1';
-      document.getElementById('viewport').scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /* WhatsApp RSVP Link */
     function openWhatsAppRSVP() {
       const text = encodeURIComponent(
-        "Hi Ankita & Ashish! ✨ We are delighted to RSVP for your wedding celebrations (October 22–25, 2026). Looking forward to celebrating with you both!"
+        "Hi Ankita & Ashish! ✨ We are delighted to RSVP for your wedding celebrations (November 22–25, 2026). Looking forward to celebrating with you both!"
       );
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
-    /* Multi-Day Calendar Integration */
+    /* Multi-Day Calendar Integration (Updated to November) */
     function addToCalendar() {
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
       const title = "Wedding Celebrations of Ankita & Ashish";
       const details = "Celebrate the multi-day wedding festivities of Ankita & Ashish (Engagement, Haldi, Sangeet & Grand Wedding).";
-      const location = "Virar East & Kalyan, Maharashtra";
+      const location = "Virar West & Kalyan, Maharashtra";
       
-      const startUTC = "20261022T123000Z";
-      const endUTC = "20261026T043000Z";
+      // November 22, 2026 to November 26, 2026 UTC
+      const startUTC = "20261122T123000Z";
+      const endUTC = "20261126T043000Z";
 
       if (isIOS) {
         const icsData = [
